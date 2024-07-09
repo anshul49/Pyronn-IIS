@@ -32,14 +32,11 @@ If you find this helpful, we would kindly ask you to reference our article publi
 
 Update
 =========
-With the new pyronn 0.1.2 Pytorch will be supported. The default mode for pyronn is eager execution like Tensorflow itself.
-Major features in the update are:
-- TODO...
+
+Q&A
+=========
     - DLL load failed while importing pyronn_layers: Das angegebene Modul wurde nicht gefunden. (import pyronn first)
     - DLL load failed while importing pyronn_layers: Die angegebene Prozedur wurde nicht gefunden. (torch version problem)
-
-Planned
-=========
 
 
 Installation
@@ -55,17 +52,16 @@ NOT support remotely yet. Contact maintainers to get the wheel file.
 or you can downloaded this repository (https://github.com/csyben/PYRO-NN) and build a wheel by yourself:
 
     - Microsoft Visual C++ 14.0 or greater is required
+    - for windows system, wsl2 is required
     - build package is required
     - cuda is required(more than 10.2)
     
     1. clone the repository
-    2. change into torch branch
+    2. change into combination branch
     3. modify toml file if needed, please make sure the torch version in toml file is the same as your enviornment, or DLL error will happens.
     4. run "python -m build ."
     5. the wheel file will be at the dist directory.
 
-   
-    
 
 If necessary, you can change pyproject.toml for specific torch version.
 
