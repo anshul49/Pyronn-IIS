@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pyronn.ct_reconstruction.helpers.trajectories.arbitrary_trajectory &mdash; PyroNN 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../../../_static/documentation_options.js?v=8d563738"></script>
+        <script src="../../../../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../../index.html" class="icon icon-home">
+            PyroNN
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"></div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../index.html">PyroNN</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../../index.html">Module code</a></li>
+          <li class="breadcrumb-item"><a href="../../../../pyronn.html">pyronn</a></li>
+          <li class="breadcrumb-item"><a href="../../../ct_reconstruction.html">pyronn.ct_reconstruction</a></li>
+      <li class="breadcrumb-item active">pyronn.ct_reconstruction.helpers.trajectories.arbitrary_trajectory</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for pyronn.ct_reconstruction.helpers.trajectories.arbitrary_trajectory</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="c1"># import trimesh</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">pyronn.ct_reconstruction.helpers.misc.general_utils</span> <span class="kn">import</span> <span class="n">fibonacci_sphere</span><span class="p">,</span> <span class="n">rotation_matrix_from_points</span>
+
+<div class="viewcode-block" id="arbitrary_projection_matrix">
+<a class="viewcode-back" href="../../../../../pyronn.ct_reconstruction.helpers.trajectories.html#pyronn.ct_reconstruction.helpers.trajectories.arbitrary_trajectory.arbitrary_projection_matrix">[docs]</a>
+<span class="k">def</span> <span class="nf">arbitrary_projection_matrix</span><span class="p">(</span><span class="n">headers</span><span class="p">,</span><span class="n">voxel_size</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.45</span><span class="p">,</span><span class="mf">0.45</span><span class="p">],</span> <span class="n">swap_detector_axis</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="c1">#Source: Auto-calibration of cone beam geometries from arbitrary rotating markers using a vector geometry formulation of projection matrices by Graetz, Jonas</span>
+    <span class="n">number_of_projections</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">headers</span><span class="p">)</span>
+    <span class="c1"># init empty</span>
+    <span class="n">projection_matrices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">number_of_projections</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+
+    <span class="n">detector_shape</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+            <span class="p">[</span><span class="n">headers</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">number_vertical_pixels</span><span class="p">,</span> <span class="n">headers</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">number_horizontal_pixels</span><span class="p">])</span>
+    
+    <span class="c1"># Shift into left upper corner of the detector</span>
+    <span class="n">detector_left_corner_trans</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> 
+    <span class="n">detector_left_corner_trans</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="o">+</span> <span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">headers</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">number_vertical_pixels</span><span class="p">)</span> <span class="o">-</span> <span class="mf">1.</span><span class="p">)</span> <span class="o">/</span> <span class="mf">2.</span>
+    <span class="n">detector_left_corner_trans</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="o">+</span> <span class="p">(</span><span class="nb">float</span><span class="p">(</span> <span class="n">headers</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">number_horizontal_pixels</span><span class="p">)</span> <span class="o">-</span> <span class="mf">1.</span><span class="p">)</span> <span class="o">/</span> <span class="mf">2.</span>
+    <span class="n">detector_left_corner_trans</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">*=</span> <span class="mi">1</span>
+    <span class="n">detector_left_corner_trans</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">*=</span> <span class="o">-</span><span class="mi">1</span>
+    <span class="n">detector_left_corner_trans</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.</span>
+    <span class="n">traj_type</span> <span class="o">=</span> <span class="s1">&#39;circ&#39;</span> <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">array_equal</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">headers</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">agv_source_position</span><span class="p">),</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]))</span> <span class="k">else</span> <span class="s1">&#39;free&#39;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">traj_type</span><span class="p">)</span>
+    <span class="c1">#Initial stuff for circular trajectory:</span>
+    <span class="k">if</span> <span class="n">traj_type</span> <span class="o">==</span> <span class="s1">&#39;circ&#39;</span><span class="p">:</span>
+        <span class="n">init_source_position</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">headers</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">focus_object_distance_in_mm</span><span class="p">]</span>
+        <span class="n">init_detector_position</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">headers</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">focus_object_distance_in_mm</span> <span class="o">-</span> <span class="n">headers</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">focus_detector_distance_in_mm</span><span class="p">]</span>
+        <span class="n">init_detector_line_direction</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">init_detector_column_direction</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">angular_range</span> <span class="o">=</span> <span class="n">headers</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">scan_range_in_rad</span>
+        <span class="k">if</span> <span class="n">angular_range</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">angular_range</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span>
+        <span class="n">current_angle</span> <span class="o">=</span> <span class="mi">0</span> 
+        <span class="n">angular_increment</span> <span class="o">=</span> <span class="n">angular_range</span><span class="o">/</span><span class="n">number_of_projections</span>
+
+    <span class="k">for</span> <span class="n">p</span><span class="p">,</span> <span class="n">header</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">headers</span><span class="p">):</span> 
+        <span class="k">if</span> <span class="n">traj_type</span> <span class="o">==</span> <span class="s1">&#39;free&#39;</span><span class="p">:</span>
+            <span class="n">det_h</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">header</span><span class="o">.</span><span class="n">agv_detector_line_direction</span><span class="p">)</span>
+            <span class="n">det_v</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">header</span><span class="o">.</span><span class="n">agv_detector_col_direction</span><span class="p">)</span>
+            <span class="n">source_center_in_voxel</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">header</span><span class="o">.</span><span class="n">agv_source_position</span><span class="p">)</span><span class="o">/</span><span class="mi">1000</span><span class="p">)</span><span class="o">/</span><span class="n">voxel_size</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="c1"># in mm</span>
+            <span class="n">detector_center_in_voxel</span>  <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">header</span><span class="o">.</span><span class="n">agv_detector_center_position</span><span class="p">)</span><span class="o">/</span><span class="mi">1000</span><span class="p">)</span><span class="o">/</span><span class="n">voxel_size</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="c1"># in mm</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># rotation about x axis =&gt; Column direction of the detector</span>
+            <span class="n">R_x_axis</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+            <span class="n">R_x_axis</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span>
+                                           <span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="o">-</span><span class="n">current_angle</span><span class="p">),</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="o">-</span><span class="n">current_angle</span><span class="p">),</span>
+                                           <span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="o">-</span><span class="n">current_angle</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="o">-</span><span class="n">current_angle</span><span class="p">)])</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+            <span class="n">source_center_in_voxel</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">R_x_axis</span><span class="p">,</span><span class="n">init_source_position</span><span class="p">)</span><span class="o">/</span><span class="n">voxel_size</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">detector_center_in_voxel</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">R_x_axis</span><span class="p">,</span><span class="n">init_detector_position</span><span class="p">)</span><span class="o">/</span><span class="n">voxel_size</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">det_h</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">R_x_axis</span><span class="p">,</span><span class="n">init_detector_line_direction</span><span class="p">)</span>
+            <span class="n">det_v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">R_x_axis</span><span class="p">,</span><span class="n">init_detector_column_direction</span><span class="p">)</span>
+            <span class="n">current_angle</span> <span class="o">+=</span> <span class="n">angular_increment</span>
+
+        <span class="c1">#[H|V|d-s]</span>
+        <span class="n">h_v_sdd</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">column_stack</span><span class="p">((</span><span class="n">det_h</span><span class="p">,</span> <span class="n">det_v</span><span class="p">,</span> <span class="p">(</span><span class="n">detector_center_in_voxel</span> <span class="o">-</span> <span class="n">source_center_in_voxel</span><span class="p">)</span> <span class="p">))</span>
+        <span class="n">h_v_sdd_invers</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">h_v_sdd</span><span class="p">)</span>
+        <span class="c1"># [H|V|d-s]^-1 * -s</span>
+        <span class="n">back_part</span> <span class="o">=</span> <span class="n">h_v_sdd_invers</span> <span class="o">@</span> <span class="p">(</span><span class="o">-</span><span class="n">source_center_in_voxel</span><span class="p">)</span>
+        <span class="n">proj_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">column_stack</span><span class="p">((</span><span class="n">h_v_sdd_invers</span><span class="p">,</span><span class="n">back_part</span><span class="p">))</span>
+        <span class="n">projection_matrices</span><span class="p">[</span><span class="n">p</span><span class="p">]</span> <span class="o">=</span>  <span class="n">detector_left_corner_trans</span> <span class="o">@</span> <span class="n">proj_matrix</span>
+        
+        <span class="c1"># post processing to get the same oriented outputvolume like ezrt commandline reco: =&gt; tested, no changes needed to get the same orientation as Firefly ART</span>
+        <span class="c1"># flip Z-Axis: Z = -Z</span>
+        <span class="k">if</span> <span class="n">swap_detector_axis</span><span class="p">:</span>
+            <span class="n">projection_matrices</span><span class="p">[</span><span class="n">p</span><span class="p">][</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">projection_matrices</span><span class="p">[</span><span class="n">p</span><span class="p">][</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">*</span> <span class="o">-</span><span class="mf">1.0</span>
+
+        <span class="c1"># change orientation of current matrix from XYZ to YXZ: exchange the first two columns</span>
+        <span class="c1"># projection_matrices[p][0:3, 0:2] = np.flip(projection_matrices[p][0:3, 0:2], axis=1)</span>
+        <span class="c1"># change orientation of current matrix from YXZ to YZX: exchange the last two columns</span>
+        <span class="c1"># projection_matrices[p][0:3, 1:3] = np.flip(projection_matrices[p][0:3, 1:3], axis=1)</span>
+    <span class="k">return</span> <span class="n">projection_matrices</span></div>
+
+
+
+<div class="viewcode-block" id="fibonacci_sphere_projecton_matrix">
+<a class="viewcode-back" href="../../../../../pyronn.ct_reconstruction.helpers.trajectories.html#pyronn.ct_reconstruction.helpers.trajectories.arbitrary_trajectory.fibonacci_sphere_projecton_matrix">[docs]</a>
+<span class="k">def</span> <span class="nf">fibonacci_sphere_projecton_matrix</span><span class="p">(</span><span class="n">number_of_projections</span><span class="p">,</span> <span class="n">source_detector_distance</span><span class="p">,</span>
+                                      <span class="n">detector_spacing</span><span class="p">,</span> <span class="n">source_isocenter_distance</span><span class="p">,</span> <span class="n">detector_origin</span><span class="p">,</span>
+                                      <span class="n">swap_axis</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="c1"># init empty</span>
+    <span class="c1"># assert len(pts) == number_of_projections</span>
+    <span class="n">pts</span> <span class="o">=</span> <span class="n">fibonacci_sphere</span><span class="p">(</span><span class="n">number_of_projections</span><span class="p">)</span>
+    <span class="n">projection_matrices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">pts</span><span class="p">),</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+    <span class="n">x_axis</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">])</span>
+    <span class="n">y_axis</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">])</span>
+    <span class="n">z_axis</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">])</span>
+
+    <span class="n">u_dir</span> <span class="o">=</span> <span class="n">y_axis</span>
+    <span class="k">if</span> <span class="n">swap_axis</span><span class="p">:</span>
+        <span class="n">v_dir</span> <span class="o">=</span> <span class="n">x_axis</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">v_dir</span> <span class="o">=</span> <span class="o">-</span><span class="n">x_axis</span>
+
+    <span class="n">intrinsic_params_mat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
+        <span class="n">intrinsic_params_mat</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">source_detector_distance</span> <span class="o">/</span> <span class="n">detector_spacing</span><span class="p">[</span><span class="mi">1</span> <span class="o">-</span> <span class="n">i</span><span class="p">]</span>
+
+    <span class="c1"># calc and set detector origin</span>
+    <span class="c1"># we need t_x and t_y, and follow the [z,y,x] convention</span>
+
+    <span class="n">intrinsic_params_mat</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">detector_origin</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="n">detector_spacing</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="o">-</span><span class="mi">1</span>
+    <span class="n">intrinsic_params_mat</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">detector_origin</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span> <span class="o">/</span> <span class="n">detector_spacing</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span> <span class="o">*</span> <span class="o">-</span><span class="mi">1</span>
+
+    <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">pts</span><span class="p">)):</span>
+        <span class="n">extrinsic_params_mat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+
+        <span class="n">R_to_plane</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+        <span class="n">R_to_plane</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">z_axis</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">cross</span><span class="p">(</span><span class="n">z_axis</span><span class="p">,</span> <span class="n">x_axis</span><span class="p">),</span> <span class="o">-</span><span class="n">x_axis</span><span class="p">])</span>
+
+
+        <span class="n">axis_align_R</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+        <span class="n">axis_align_R</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">u_dir</span>
+        <span class="n">axis_align_R</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">v_dir</span>
+        <span class="n">axis_align_R</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cross</span><span class="p">(</span><span class="n">u_dir</span><span class="p">,</span> <span class="n">v_dir</span><span class="p">)</span>
+        <span class="n">axis_align_R</span> <span class="o">=</span> <span class="n">axis_align_R</span><span class="o">.</span><span class="n">T</span>
+
+        <span class="n">translation</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+        <span class="n">translation</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">source_isocenter_distance</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+
+        <span class="n">R_to_pts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+        <span class="n">R_to_pts</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">rotation_matrix_from_points</span><span class="p">(</span><span class="n">pts</span><span class="p">[</span><span class="n">p</span><span class="p">],</span>
+                                                         <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">source_isocenter_distance</span><span class="p">])</span>
+                                                         <span class="p">)</span>
+
+        <span class="n">extrinsic_params_mat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">translation</span><span class="p">,</span> <span class="n">axis_align_R</span><span class="p">),</span> <span class="n">R_to_pts</span><span class="p">),</span> <span class="n">R_to_plane</span><span class="p">)</span>
+        <span class="n">extrinsic_params_mat</span> <span class="o">=</span> <span class="n">extrinsic_params_mat</span> <span class="o">/</span> <span class="n">extrinsic_params_mat</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+
+        <span class="n">projection_matrices</span><span class="p">[</span><span class="n">p</span><span class="p">][</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">intrinsic_params_mat</span><span class="p">,</span> <span class="n">extrinsic_params_mat</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">])</span>
+        <span class="n">projection_matrices</span><span class="p">[</span><span class="n">p</span><span class="p">][</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">intrinsic_params_mat</span><span class="p">,</span> <span class="n">extrinsic_params_mat</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+
+    <span class="k">return</span> <span class="n">projection_matrices</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Anshul Dhingra.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

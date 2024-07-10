@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pyronn.ct_reconstruction.helpers.phantoms package &mdash; PyroNN 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=8d563738"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            PyroNN
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">pyronn.ct_reconstruction.helpers.phantoms package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-pyronn.ct_reconstruction.helpers.phantoms.primitives_2d">pyronn.ct_reconstruction.helpers.phantoms.primitives_2d module</a><ul>
+<li><a class="reference internal" href="#pyronn.ct_reconstruction.helpers.phantoms.primitives_2d.circle"><code class="docutils literal notranslate"><span class="pre">circle()</span></code></a></li>
+<li><a class="reference internal" href="#pyronn.ct_reconstruction.helpers.phantoms.primitives_2d.ellipse"><code class="docutils literal notranslate"><span class="pre">ellipse()</span></code></a></li>
+<li><a class="reference internal" href="#pyronn.ct_reconstruction.helpers.phantoms.primitives_2d.rect"><code class="docutils literal notranslate"><span class="pre">rect()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-pyronn.ct_reconstruction.helpers.phantoms.primitives_3d">pyronn.ct_reconstruction.helpers.phantoms.primitives_3d module</a><ul>
+<li><a class="reference internal" href="#pyronn.ct_reconstruction.helpers.phantoms.primitives_3d.generate_3D_primitives"><code class="docutils literal notranslate"><span class="pre">generate_3D_primitives()</span></code></a></li>
+<li><a class="reference internal" href="#pyronn.ct_reconstruction.helpers.phantoms.primitives_3d.place_cube"><code class="docutils literal notranslate"><span class="pre">place_cube()</span></code></a></li>
+<li><a class="reference internal" href="#pyronn.ct_reconstruction.helpers.phantoms.primitives_3d.place_cube_with_rotation"><code class="docutils literal notranslate"><span class="pre">place_cube_with_rotation()</span></code></a></li>
+<li><a class="reference internal" href="#pyronn.ct_reconstruction.helpers.phantoms.primitives_3d.place_cylinder_with_rotation"><code class="docutils literal notranslate"><span class="pre">place_cylinder_with_rotation()</span></code></a></li>
+<li><a class="reference internal" href="#pyronn.ct_reconstruction.helpers.phantoms.primitives_3d.place_ellipsoid_with_rotation"><code class="docutils literal notranslate"><span class="pre">place_ellipsoid_with_rotation()</span></code></a></li>
+<li><a class="reference internal" href="#pyronn.ct_reconstruction.helpers.phantoms.primitives_3d.place_pyramid"><code class="docutils literal notranslate"><span class="pre">place_pyramid()</span></code></a></li>
+<li><a class="reference internal" href="#pyronn.ct_reconstruction.helpers.phantoms.primitives_3d.place_sphere"><code class="docutils literal notranslate"><span class="pre">place_sphere()</span></code></a></li>
+<li><a class="reference internal" href="#pyronn.ct_reconstruction.helpers.phantoms.primitives_3d.rotate_point_around_z"><code class="docutils literal notranslate"><span class="pre">rotate_point_around_z()</span></code></a></li>
+<li><a class="reference internal" href="#pyronn.ct_reconstruction.helpers.phantoms.primitives_3d.visualize_grid"><code class="docutils literal notranslate"><span class="pre">visualize_grid()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-pyronn.ct_reconstruction.helpers.phantoms.shepp_logan">pyronn.ct_reconstruction.helpers.phantoms.shepp_logan module</a><ul>
+<li><a class="reference internal" href="#pyronn.ct_reconstruction.helpers.phantoms.shepp_logan.shepp_logan"><code class="docutils literal notranslate"><span class="pre">shepp_logan()</span></code></a></li>
+<li><a class="reference internal" href="#pyronn.ct_reconstruction.helpers.phantoms.shepp_logan.shepp_logan_3d"><code class="docutils literal notranslate"><span class="pre">shepp_logan_3d()</span></code></a></li>
+<li><a class="reference internal" href="#pyronn.ct_reconstruction.helpers.phantoms.shepp_logan.shepp_logan_enhanced"><code class="docutils literal notranslate"><span class="pre">shepp_logan_enhanced()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-pyronn.ct_reconstruction.helpers.phantoms">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">PyroNN</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">pyronn.ct_reconstruction.helpers.phantoms package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/pyronn.ct_reconstruction.helpers.phantoms.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="pyronn-ct-reconstruction-helpers-phantoms-package">
+<h1>pyronn.ct_reconstruction.helpers.phantoms package<a class="headerlink" href="#pyronn-ct-reconstruction-helpers-phantoms-package" title="Link to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+</section>
+<section id="module-pyronn.ct_reconstruction.helpers.phantoms.primitives_2d">
+<span id="pyronn-ct-reconstruction-helpers-phantoms-primitives-2d-module"></span><h2>pyronn.ct_reconstruction.helpers.phantoms.primitives_2d module<a class="headerlink" href="#module-pyronn.ct_reconstruction.helpers.phantoms.primitives_2d" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="pyronn.ct_reconstruction.helpers.phantoms.primitives_2d.circle">
+<span class="sig-prename descclassname"><span class="pre">pyronn.ct_reconstruction.helpers.phantoms.primitives_2d.</span></span><span class="sig-name descname"><span class="pre">circle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">shape</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pos</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">radius</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyronn/ct_reconstruction/helpers/phantoms/primitives_2d.html#circle"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyronn.ct_reconstruction.helpers.phantoms.primitives_2d.circle" title="Link to this definition"></a></dt>
+<dd><blockquote>
+<div><p>Creates a simple circle primitive.</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>shape</strong> – Shape (in [Y, X])</p></li>
+<li><p><strong>pos</strong> – Center (in [Y, X]) from upper left corner</p></li>
+<li><p><strong>radius</strong> – Radius</p></li>
+<li><p><strong>value</strong> – Value</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>np.array filled with circle</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyronn.ct_reconstruction.helpers.phantoms.primitives_2d.ellipse">
+<span class="sig-prename descclassname"><span class="pre">pyronn.ct_reconstruction.helpers.phantoms.primitives_2d.</span></span><span class="sig-name descname"><span class="pre">ellipse</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">shape</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pos</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">half_axes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">phi</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyronn/ct_reconstruction/helpers/phantoms/primitives_2d.html#ellipse"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyronn.ct_reconstruction.helpers.phantoms.primitives_2d.ellipse" title="Link to this definition"></a></dt>
+<dd><blockquote>
+<div><p>Creates a simple ellipse primitive.</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>shape</strong> – Shape (in [Y, X])</p></li>
+<li><p><strong>pos</strong> – Center (in [Y, X]) from upper left corner</p></li>
+<li><p><strong>half_axes</strong> – Half axes of the ellipse (in [b, a])</p></li>
+<li><p><strong>value</strong> – Value</p></li>
+<li><p><strong>phi</strong> – Rotation Angle in radians</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>np.array filled with ellipse</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyronn.ct_reconstruction.helpers.phantoms.primitives_2d.rect">
+<span class="sig-prename descclassname"><span class="pre">pyronn.ct_reconstruction.helpers.phantoms.primitives_2d.</span></span><span class="sig-name descname"><span class="pre">rect</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">shape</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pos</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyronn/ct_reconstruction/helpers/phantoms/primitives_2d.html#rect"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyronn.ct_reconstruction.helpers.phantoms.primitives_2d.rect" title="Link to this definition"></a></dt>
+<dd><blockquote>
+<div><p>Creates a simple rect primitive.</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>shape</strong> – Shape (in [Y, X])</p></li>
+<li><p><strong>pos</strong> – Pos (upper left corner) (in [Y, X]) from upper left corner</p></li>
+<li><p><strong>size</strong> – Size  (in [Y, X])</p></li>
+<li><p><strong>value</strong> – Value</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>np.array filled with rectangle</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-pyronn.ct_reconstruction.helpers.phantoms.primitives_3d">
+<span id="pyronn-ct-reconstruction-helpers-phantoms-primitives-3d-module"></span><h2>pyronn.ct_reconstruction.helpers.phantoms.primitives_3d module<a class="headerlink" href="#module-pyronn.ct_reconstruction.helpers.phantoms.primitives_3d" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="pyronn.ct_reconstruction.helpers.phantoms.primitives_3d.generate_3D_primitives">
+<span class="sig-prename descclassname"><span class="pre">pyronn.ct_reconstruction.helpers.phantoms.primitives_3d.</span></span><span class="sig-name descname"><span class="pre">generate_3D_primitives</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">volume_shape</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number_of_primitives</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyronn/ct_reconstruction/helpers/phantoms/primitives_3d.html#generate_3D_primitives"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyronn.ct_reconstruction.helpers.phantoms.primitives_3d.generate_3D_primitives" title="Link to this definition"></a></dt>
+<dd><p>Generates a 3D phantom composed of a specified number of random geometric primitives. The primitives are added
+to the phantom with random positions, orientations, sizes, and intensities. The method returns both
+the phantom and its sinogram as PyTorch tensors.</p>
+<p>Parameters:
+- volume_shape: shape of the phantom
+- number_of_primitives (int, optional): The number of geometric primitives to include in the phantom.
+Defaults to 6.</p>
+<p>Returns:
+- numpy.array: The 3D phantom.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyronn.ct_reconstruction.helpers.phantoms.primitives_3d.place_cube">
+<span class="sig-prename descclassname"><span class="pre">pyronn.ct_reconstruction.helpers.phantoms.primitives_3d.</span></span><span class="sig-name descname"><span class="pre">place_cube</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">grid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pos</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyronn/ct_reconstruction/helpers/phantoms/primitives_3d.html#place_cube"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyronn.ct_reconstruction.helpers.phantoms.primitives_3d.place_cube" title="Link to this definition"></a></dt>
+<dd><p>Updates an existing 3D grid by placing a cube object within it.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>grid</strong> – The existing 3D numpy array (meshgrid) to update.</p></li>
+<li><p><strong>pos</strong> – Position of the cube’s upper left corner (in [Z, Y, X]).</p></li>
+<li><p><strong>size</strong> – Size of the cube (in [Z, Y, X]).</p></li>
+<li><p><strong>value</strong> – Value to fill the cube with.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None; the function updates the grid in place.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyronn.ct_reconstruction.helpers.phantoms.primitives_3d.place_cube_with_rotation">
+<span class="sig-prename descclassname"><span class="pre">pyronn.ct_reconstruction.helpers.phantoms.primitives_3d.</span></span><span class="sig-name descname"><span class="pre">place_cube_with_rotation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">grid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pos</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">angle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyronn/ct_reconstruction/helpers/phantoms/primitives_3d.html#place_cube_with_rotation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyronn.ct_reconstruction.helpers.phantoms.primitives_3d.place_cube_with_rotation" title="Link to this definition"></a></dt>
+<dd><p>Updates an existing 3D grid by placing a cube object within it, potentially rotated around the Z-axis.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>grid</strong> – The existing 3D numpy array (meshgrid) to update.</p></li>
+<li><p><strong>pos</strong> – Position of the cube’s upper left corner (in [Z, Y, X]).</p></li>
+<li><p><strong>size</strong> – Size of the cube (in [Z, Y, X]).</p></li>
+<li><p><strong>value</strong> – Value to fill the cube with.</p></li>
+<li><p><strong>angle</strong> – Rotation angle in radians around the Z-axis. If None, a random angle is chosen.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None; the function updates the grid in place.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyronn.ct_reconstruction.helpers.phantoms.primitives_3d.place_cylinder_with_rotation">
+<span class="sig-prename descclassname"><span class="pre">pyronn.ct_reconstruction.helpers.phantoms.primitives_3d.</span></span><span class="sig-name descname"><span class="pre">place_cylinder_with_rotation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">grid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pos</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">radius</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">angle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyronn/ct_reconstruction/helpers/phantoms/primitives_3d.html#place_cylinder_with_rotation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyronn.ct_reconstruction.helpers.phantoms.primitives_3d.place_cylinder_with_rotation" title="Link to this definition"></a></dt>
+<dd><p>Updates an existing 3D grid by placing a randomly rotated cylinder object within it.
+:param grid: The existing 3D numpy array (meshgrid) to update.
+:param pos: Center of the base of the cylinder (in [Z, Y, X]).
+:param height: Height of the cylinder along the Z-axis.
+:param radius: Radius of the cylinder in the XY plane.
+:param value: Value to fill the cylinder with.
+:param angle: Rotation angle in radians around the Z-axis. If None, a random angle is chosen.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None; the function updates the grid in place.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyronn.ct_reconstruction.helpers.phantoms.primitives_3d.place_ellipsoid_with_rotation">
+<span class="sig-prename descclassname"><span class="pre">pyronn.ct_reconstruction.helpers.phantoms.primitives_3d.</span></span><span class="sig-name descname"><span class="pre">place_ellipsoid_with_rotation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">grid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pos</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">radii</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">angle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyronn/ct_reconstruction/helpers/phantoms/primitives_3d.html#place_ellipsoid_with_rotation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyronn.ct_reconstruction.helpers.phantoms.primitives_3d.place_ellipsoid_with_rotation" title="Link to this definition"></a></dt>
+<dd><p>Updates an existing 3D grid by placing a randomly rotated ellipsoid object within it.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>grid</strong> – The existing 3D numpy array (meshgrid) to update.</p></li>
+<li><p><strong>pos</strong> – Center of the ellipsoid (in [Z, Y, X]).</p></li>
+<li><p><strong>radii</strong> – Radii of the ellipsoid (in [Z, Y, X]).</p></li>
+<li><p><strong>value</strong> – Value to fill the ellipsoid with.</p></li>
+<li><p><strong>angle</strong> – Rotation angle in radians around the Z-axis. If None, a random angle is chosen.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None; the function updates the grid in place.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyronn.ct_reconstruction.helpers.phantoms.primitives_3d.place_pyramid">
+<span class="sig-prename descclassname"><span class="pre">pyronn.ct_reconstruction.helpers.phantoms.primitives_3d.</span></span><span class="sig-name descname"><span class="pre">place_pyramid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">grid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_center</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyronn/ct_reconstruction/helpers/phantoms/primitives_3d.html#place_pyramid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyronn.ct_reconstruction.helpers.phantoms.primitives_3d.place_pyramid" title="Link to this definition"></a></dt>
+<dd><p>Places an axis-aligned pyramid into a 3D grid.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>grid</strong> – 3D numpy array representing the grid.</p></li>
+<li><p><strong>base_center</strong> – Center of the pyramid’s base in the grid (z, y, x).</p></li>
+<li><p><strong>base_size</strong> – Side length of the pyramid’s square base.</p></li>
+<li><p><strong>height</strong> – Height of the pyramid.</p></li>
+<li><p><strong>value</strong> – Value to fill the pyramid with.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None; the grid is modified in place.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyronn.ct_reconstruction.helpers.phantoms.primitives_3d.place_sphere">
+<span class="sig-prename descclassname"><span class="pre">pyronn.ct_reconstruction.helpers.phantoms.primitives_3d.</span></span><span class="sig-name descname"><span class="pre">place_sphere</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">grid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pos</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">radius</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyronn/ct_reconstruction/helpers/phantoms/primitives_3d.html#place_sphere"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyronn.ct_reconstruction.helpers.phantoms.primitives_3d.place_sphere" title="Link to this definition"></a></dt>
+<dd><p>Updates an existing 3D grid by placing a spherical object within it.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>grid</strong> – The existing 3D numpy array (meshgrid) to update.</p></li>
+<li><p><strong>pos</strong> – Center of the sphere (in [Z, Y, X]).</p></li>
+<li><p><strong>radius</strong> – Radius of the sphere.</p></li>
+<li><p><strong>value</strong> – Value to fill the sphere with.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None; the function updates the grid in place.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyronn.ct_reconstruction.helpers.phantoms.primitives_3d.rotate_point_around_z">
+<span class="sig-prename descclassname"><span class="pre">pyronn.ct_reconstruction.helpers.phantoms.primitives_3d.</span></span><span class="sig-name descname"><span class="pre">rotate_point_around_z</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">angle</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyronn/ct_reconstruction/helpers/phantoms/primitives_3d.html#rotate_point_around_z"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyronn.ct_reconstruction.helpers.phantoms.primitives_3d.rotate_point_around_z" title="Link to this definition"></a></dt>
+<dd><p>Rotate a point around the Z-axis by a given angle.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> – Coordinates of the point.</p></li>
+<li><p><strong>y</strong> – Coordinates of the point.</p></li>
+<li><p><strong>z</strong> – Coordinates of the point.</p></li>
+<li><p><strong>angle</strong> – Rotation angle in radians.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Rotated coordinates (x’, y’, z’).</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyronn.ct_reconstruction.helpers.phantoms.primitives_3d.visualize_grid">
+<span class="sig-prename descclassname"><span class="pre">pyronn.ct_reconstruction.helpers.phantoms.primitives_3d.</span></span><span class="sig-name descname"><span class="pre">visualize_grid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">grid</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyronn/ct_reconstruction/helpers/phantoms/primitives_3d.html#visualize_grid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyronn.ct_reconstruction.helpers.phantoms.primitives_3d.visualize_grid" title="Link to this definition"></a></dt>
+<dd><p>Visualizes a 3D grid using matplotlib, plotting points where the grid value is non-zero.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>grid</strong> – The 3D numpy array to visualize.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-pyronn.ct_reconstruction.helpers.phantoms.shepp_logan">
+<span id="pyronn-ct-reconstruction-helpers-phantoms-shepp-logan-module"></span><h2>pyronn.ct_reconstruction.helpers.phantoms.shepp_logan module<a class="headerlink" href="#module-pyronn.ct_reconstruction.helpers.phantoms.shepp_logan" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="pyronn.ct_reconstruction.helpers.phantoms.shepp_logan.shepp_logan">
+<span class="sig-prename descclassname"><span class="pre">pyronn.ct_reconstruction.helpers.phantoms.shepp_logan.</span></span><span class="sig-name descname"><span class="pre">shepp_logan</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">shape</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyronn/ct_reconstruction/helpers/phantoms/shepp_logan.html#shepp_logan"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyronn.ct_reconstruction.helpers.phantoms.shepp_logan.shepp_logan" title="Link to this definition"></a></dt>
+<dd><blockquote>
+<div><p>Creates the Shepp Logan Phantom.</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>shape</strong> – Shape (in [Y, X]) of Shepp Logan phantom to create.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Shepp Logan of shape as np.array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyronn.ct_reconstruction.helpers.phantoms.shepp_logan.shepp_logan_3d">
+<span class="sig-prename descclassname"><span class="pre">pyronn.ct_reconstruction.helpers.phantoms.shepp_logan.</span></span><span class="sig-name descname"><span class="pre">shepp_logan_3d</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">shape</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyronn/ct_reconstruction/helpers/phantoms/shepp_logan.html#shepp_logan_3d"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyronn.ct_reconstruction.helpers.phantoms.shepp_logan.shepp_logan_3d" title="Link to this definition"></a></dt>
+<dd><blockquote>
+<div><p>Creates a Shepp Logan like 3d Phantom. Definition adopted from CONRAD.</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>shape</strong> – Shape (in [Y, X]) of Shepp Logan phantom to create.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Phantom of shape as np.array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyronn.ct_reconstruction.helpers.phantoms.shepp_logan.shepp_logan_enhanced">
+<span class="sig-prename descclassname"><span class="pre">pyronn.ct_reconstruction.helpers.phantoms.shepp_logan.</span></span><span class="sig-name descname"><span class="pre">shepp_logan_enhanced</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">shape</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyronn/ct_reconstruction/helpers/phantoms/shepp_logan.html#shepp_logan_enhanced"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyronn.ct_reconstruction.helpers.phantoms.shepp_logan.shepp_logan_enhanced" title="Link to this definition"></a></dt>
+<dd><blockquote>
+<div><p>Creates a contrast enhanced Shepp Logan Phantom.</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>shape</strong> – Shape (in [Y, X]) of phantom to create.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Phantom of shape as np.array</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-pyronn.ct_reconstruction.helpers.phantoms">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-pyronn.ct_reconstruction.helpers.phantoms" title="Link to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Anshul Dhingra.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

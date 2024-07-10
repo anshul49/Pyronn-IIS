@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pyronn.ct_reconstruction.helpers.filters.filters &mdash; PyroNN 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../../../_static/documentation_options.js?v=8d563738"></script>
+        <script src="../../../../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../../index.html" class="icon icon-home">
+            PyroNN
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"></div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../index.html">PyroNN</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../../index.html">Module code</a></li>
+          <li class="breadcrumb-item"><a href="../../../../pyronn.html">pyronn</a></li>
+          <li class="breadcrumb-item"><a href="../../../ct_reconstruction.html">pyronn.ct_reconstruction</a></li>
+      <li class="breadcrumb-item active">pyronn.ct_reconstruction.helpers.filters.filters</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for pyronn.ct_reconstruction.helpers.filters.filters</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright [2019] [Christopher Syben, Markus Michen]</span>
+<span class="c1">#</span>
+<span class="c1"># Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="c1"># you may not use this file except in compliance with the License.</span>
+<span class="c1"># You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#     http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1"># Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1"># distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1"># See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Tuple</span>
+
+
+<div class="viewcode-block" id="ramp">
+<a class="viewcode-back" href="../../../../../pyronn.ct_reconstruction.helpers.filters.html#pyronn.ct_reconstruction.helpers.filters.filters.ramp">[docs]</a>
+<span class="k">def</span> <span class="nf">ramp</span><span class="p">(</span><span class="n">detector_width</span><span class="p">:</span><span class="nb">int</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    create a 1d ramp filter.</span>
+
+<span class="sd">    :param detector_width: width of detector(filter)</span>
+<span class="sd">    :return: filter</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">filter_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">detector_width</span><span class="p">)</span>
+    <span class="n">frequency_spacing</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">/</span> <span class="p">(</span><span class="n">detector_width</span> <span class="o">/</span> <span class="mf">2.0</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">filter_array</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">filter_array</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="mf">2.0</span><span class="p">:</span>
+            <span class="n">filter_array</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span> <span class="o">*</span> <span class="n">frequency_spacing</span>
+        <span class="k">elif</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="n">filter_array</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="mf">2.0</span><span class="p">:</span>
+            <span class="n">filter_array</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">-</span> <span class="p">(((</span><span class="n">i</span> <span class="o">-</span> <span class="n">filter_array</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="mf">2.0</span><span class="p">))</span> <span class="o">*</span> <span class="n">frequency_spacing</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">filter_array</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="ramp_2D">
+<a class="viewcode-back" href="../../../../../pyronn.ct_reconstruction.helpers.filters.html#pyronn.ct_reconstruction.helpers.filters.filters.ramp_2D">[docs]</a>
+<span class="k">def</span> <span class="nf">ramp_2D</span><span class="p">(</span><span class="n">detector_shape</span><span class="p">:</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span><span class="nb">int</span><span class="p">],</span> <span class="n">number_of_projections</span><span class="p">:</span><span class="nb">int</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    create a 2d ramp filter.</span>
+
+<span class="sd">    :param detector_shape: shape of detector</span>
+<span class="sd">    :param number_of_projections: number of projections</span>
+<span class="sd">    :return: a 2d ramp filter</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">detector_width</span> <span class="o">=</span> <span class="n">detector_shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="nb">filter</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span>
+            <span class="n">ramp</span><span class="p">(</span><span class="n">detector_width</span><span class="p">),</span>
+            <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">detector_width</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">number_of_projections</span><span class="p">)</span>
+    <span class="p">]</span>
+
+    <span class="nb">filter</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span><span class="nb">filter</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="nb">filter</span></div>
+
+
+
+<div class="viewcode-block" id="ramp_3D">
+<a class="viewcode-back" href="../../../../../pyronn.ct_reconstruction.helpers.filters.html#pyronn.ct_reconstruction.helpers.filters.filters.ramp_3D">[docs]</a>
+<span class="k">def</span> <span class="nf">ramp_3D</span><span class="p">(</span><span class="n">detector_shape</span><span class="p">:</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span><span class="nb">int</span><span class="p">,</span><span class="nb">int</span><span class="p">],</span> <span class="n">number_of_projections</span><span class="p">:</span><span class="nb">int</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    create a 3d ramp filter</span>
+
+<span class="sd">    :param detector_shape: shape of detector</span>
+<span class="sd">    :param number_of_projections: number of projections</span>
+<span class="sd">    :return: a 3d ramp filter</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">detector_width</span> <span class="o">=</span> <span class="n">detector_shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="nb">filter</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span>
+            <span class="n">ramp</span><span class="p">(</span><span class="n">detector_width</span><span class="p">),</span>
+            <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">detector_width</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">number_of_projections</span><span class="p">)</span>
+    <span class="p">]</span>
+
+    <span class="nb">filter</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span><span class="nb">filter</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="nb">filter</span></div>
+
+
+
+<span class="c1"># Yipeng rewrote the filters direct in frequency domain</span>
+<div class="viewcode-block" id="ram_lak">
+<a class="viewcode-back" href="../../../../../pyronn.ct_reconstruction.helpers.filters.html#pyronn.ct_reconstruction.helpers.filters.filters.ram_lak">[docs]</a>
+<span class="k">def</span> <span class="nf">ram_lak</span><span class="p">(</span><span class="n">num_detectors</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">detector_spacing</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate the RAM-LAK (Ramp) filter in the frequency domain.&quot;&quot;&quot;</span>
+    <span class="n">frequencies</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fftfreq</span><span class="p">(</span><span class="n">num_detectors</span><span class="p">)</span>
+    <span class="n">ramp</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="p">(</span><span class="n">detector_spacing</span> <span class="o">*</span> <span class="n">detector_spacing</span><span class="p">)</span>
+    <span class="nb">filter</span> <span class="o">=</span> <span class="n">ramp</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">frequencies</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="nb">filter</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="ram_lak_2D">
+<a class="viewcode-back" href="../../../../../pyronn.ct_reconstruction.helpers.filters.html#pyronn.ct_reconstruction.helpers.filters.filters.ram_lak_2D">[docs]</a>
+<span class="k">def</span> <span class="nf">ram_lak_2D</span><span class="p">(</span>
+    <span class="n">detector_shape</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">],</span>
+    <span class="n">detector_spacing</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">],</span>
+    <span class="n">number_of_projections</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">:</span>
+    <span class="n">detector_width</span> <span class="o">=</span> <span class="n">detector_shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">detector_spacing_width</span> <span class="o">=</span> <span class="n">detector_spacing</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="n">filter_1D</span> <span class="o">=</span> <span class="n">ram_lak</span><span class="p">(</span><span class="n">detector_width</span><span class="p">,</span> <span class="n">detector_spacing_width</span><span class="p">)</span>
+    <span class="n">filter_2D</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span><span class="n">filter_1D</span><span class="p">,</span> <span class="p">(</span><span class="n">number_of_projections</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">filter_2D</span></div>
+
+
+
+<div class="viewcode-block" id="ram_lak_3D">
+<a class="viewcode-back" href="../../../../../pyronn.ct_reconstruction.helpers.filters.html#pyronn.ct_reconstruction.helpers.filters.filters.ram_lak_3D">[docs]</a>
+<span class="k">def</span> <span class="nf">ram_lak_3D</span><span class="p">(</span>
+    <span class="n">detector_shape</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">],</span>
+    <span class="n">detector_spacing</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">],</span>
+    <span class="n">number_of_projections</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">:</span>
+    <span class="n">detector_width</span> <span class="o">=</span> <span class="n">detector_shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">detector_spacing_width</span> <span class="o">=</span> <span class="n">detector_spacing</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="n">filter_1D</span> <span class="o">=</span> <span class="n">ram_lak</span><span class="p">(</span><span class="n">detector_width</span><span class="p">,</span> <span class="n">detector_spacing_width</span><span class="p">)</span>
+    <span class="n">filter_3D</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span>
+        <span class="n">filter_1D</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">detector_width</span><span class="p">),</span> <span class="p">(</span><span class="n">number_of_projections</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">filter_3D</span></div>
+
+
+
+<div class="viewcode-block" id="shepp_logan">
+<a class="viewcode-back" href="../../../../../pyronn.ct_reconstruction.helpers.filters.html#pyronn.ct_reconstruction.helpers.filters.filters.shepp_logan">[docs]</a>
+<span class="k">def</span> <span class="nf">shepp_logan</span><span class="p">(</span><span class="n">num_detectors</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">detector_spacing</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate the Shepp-Logan filter in the frequency domain.&quot;&quot;&quot;</span>
+    <span class="n">frequencies</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fftfreq</span><span class="p">(</span><span class="n">num_detectors</span><span class="p">)</span>
+    <span class="n">ramp</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="p">(</span><span class="n">detector_spacing</span> <span class="o">*</span> <span class="n">detector_spacing</span><span class="p">)</span>
+    <span class="nb">filter</span> <span class="o">=</span> <span class="n">ramp</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">frequencies</span><span class="p">)</span>
+    <span class="n">sinc_filter</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span>
+        <span class="n">frequencies</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">frequencies</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">frequencies</span><span class="p">)</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="p">(</span><span class="nb">filter</span> <span class="o">*</span> <span class="n">sinc_filter</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="shepp_logan_2D">
+<a class="viewcode-back" href="../../../../../pyronn.ct_reconstruction.helpers.filters.html#pyronn.ct_reconstruction.helpers.filters.filters.shepp_logan_2D">[docs]</a>
+<span class="k">def</span> <span class="nf">shepp_logan_2D</span><span class="p">(</span>
+    <span class="n">detector_shape</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">],</span>
+    <span class="n">detector_spacing</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">],</span>
+    <span class="n">number_of_projections</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">:</span>
+    <span class="n">detector_width</span> <span class="o">=</span> <span class="n">detector_shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">detector_spacing_width</span> <span class="o">=</span> <span class="n">detector_spacing</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="n">filter_1D</span> <span class="o">=</span> <span class="n">shepp_logan</span><span class="p">(</span><span class="n">detector_width</span><span class="p">,</span> <span class="n">detector_spacing_width</span><span class="p">)</span>
+    <span class="n">filter_2D</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span><span class="n">filter_1D</span><span class="p">,</span> <span class="p">(</span><span class="n">number_of_projections</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">filter_2D</span></div>
+
+
+
+<div class="viewcode-block" id="shepp_logan_3D">
+<a class="viewcode-back" href="../../../../../pyronn.ct_reconstruction.helpers.filters.html#pyronn.ct_reconstruction.helpers.filters.filters.shepp_logan_3D">[docs]</a>
+<span class="k">def</span> <span class="nf">shepp_logan_3D</span><span class="p">(</span>
+    <span class="n">detector_shape</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">],</span>
+    <span class="n">detector_spacing</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">],</span>
+    <span class="n">number_of_projections</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">:</span>
+    <span class="n">detector_width</span> <span class="o">=</span> <span class="n">detector_shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">detector_spacing_width</span> <span class="o">=</span> <span class="n">detector_spacing</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="n">filter_1D</span> <span class="o">=</span> <span class="n">shepp_logan</span><span class="p">(</span><span class="n">detector_width</span><span class="p">,</span> <span class="n">detector_spacing_width</span><span class="p">)</span>
+    <span class="n">filter_3D</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span>
+        <span class="n">filter_1D</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">detector_width</span><span class="p">),</span> <span class="p">(</span><span class="n">number_of_projections</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">filter_3D</span></div>
+
+
+
+<div class="viewcode-block" id="cosine">
+<a class="viewcode-back" href="../../../../../pyronn.ct_reconstruction.helpers.filters.html#pyronn.ct_reconstruction.helpers.filters.filters.cosine">[docs]</a>
+<span class="k">def</span> <span class="nf">cosine</span><span class="p">(</span><span class="n">num_detectors</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">detector_spacing</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate the Cosine filter in the frequency domain.&quot;&quot;&quot;</span>
+    <span class="n">frequencies</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fftfreq</span><span class="p">(</span><span class="n">num_detectors</span><span class="p">)</span>
+    <span class="n">ramp</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="p">(</span><span class="n">detector_spacing</span> <span class="o">*</span> <span class="n">detector_spacing</span><span class="p">)</span>
+    <span class="nb">filter</span> <span class="o">=</span> <span class="n">ramp</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">frequencies</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">frequencies</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="nb">filter</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="cosine_2D">
+<a class="viewcode-back" href="../../../../../pyronn.ct_reconstruction.helpers.filters.html#pyronn.ct_reconstruction.helpers.filters.filters.cosine_2D">[docs]</a>
+<span class="k">def</span> <span class="nf">cosine_2D</span><span class="p">(</span>
+    <span class="n">detector_shape</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">],</span>
+    <span class="n">detector_spacing</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">],</span>
+    <span class="n">number_of_projections</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">:</span>
+    <span class="n">detector_width</span> <span class="o">=</span> <span class="n">detector_shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">detector_spacing_width</span> <span class="o">=</span> <span class="n">detector_spacing</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="n">filter_1D</span> <span class="o">=</span> <span class="n">cosine</span><span class="p">(</span><span class="n">detector_width</span><span class="p">,</span> <span class="n">detector_spacing_width</span><span class="p">)</span>
+    <span class="n">filter_2D</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span><span class="n">filter_1D</span><span class="p">,</span> <span class="p">(</span><span class="n">number_of_projections</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">filter_2D</span></div>
+
+
+
+<div class="viewcode-block" id="cosine_3D">
+<a class="viewcode-back" href="../../../../../pyronn.ct_reconstruction.helpers.filters.html#pyronn.ct_reconstruction.helpers.filters.filters.cosine_3D">[docs]</a>
+<span class="k">def</span> <span class="nf">cosine_3D</span><span class="p">(</span>
+    <span class="n">detector_shape</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">],</span>
+    <span class="n">detector_spacing</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">],</span>
+    <span class="n">number_of_projections</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">:</span>
+    <span class="n">detector_width</span> <span class="o">=</span> <span class="n">detector_shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">detector_spacing_width</span> <span class="o">=</span> <span class="n">detector_spacing</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="n">filter_1D</span> <span class="o">=</span> <span class="n">cosine</span><span class="p">(</span><span class="n">detector_width</span><span class="p">,</span> <span class="n">detector_spacing_width</span><span class="p">)</span>
+    <span class="n">filter_3D</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span>
+        <span class="n">filter_1D</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">detector_width</span><span class="p">),</span> <span class="p">(</span><span class="n">number_of_projections</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">filter_3D</span></div>
+
+
+
+<div class="viewcode-block" id="hamming">
+<a class="viewcode-back" href="../../../../../pyronn.ct_reconstruction.helpers.filters.html#pyronn.ct_reconstruction.helpers.filters.filters.hamming">[docs]</a>
+<span class="k">def</span> <span class="nf">hamming</span><span class="p">(</span><span class="n">num_detectors</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">detector_spacing</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate the Hamming filter in the frequency domain.&quot;&quot;&quot;</span>
+    <span class="n">frequencies</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fftfreq</span><span class="p">(</span><span class="n">num_detectors</span><span class="p">)</span>
+    <span class="n">ramp</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="p">(</span><span class="n">detector_spacing</span> <span class="o">*</span> <span class="n">detector_spacing</span><span class="p">)</span>
+    <span class="nb">filter</span> <span class="o">=</span> <span class="n">ramp</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">frequencies</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mf">0.54</span> <span class="o">+</span> <span class="mf">0.46</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">frequencies</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="nb">filter</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="hamming_2D">
+<a class="viewcode-back" href="../../../../../pyronn.ct_reconstruction.helpers.filters.html#pyronn.ct_reconstruction.helpers.filters.filters.hamming_2D">[docs]</a>
+<span class="k">def</span> <span class="nf">hamming_2D</span><span class="p">(</span>
+    <span class="n">detector_shape</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">],</span>
+    <span class="n">detector_spacing</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">],</span>
+    <span class="n">number_of_projections</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">:</span>
+    <span class="n">detector_width</span> <span class="o">=</span> <span class="n">detector_shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">detector_spacing_width</span> <span class="o">=</span> <span class="n">detector_spacing</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="n">filter_1D</span> <span class="o">=</span> <span class="n">hamming</span><span class="p">(</span><span class="n">detector_width</span><span class="p">,</span> <span class="n">detector_spacing_width</span><span class="p">)</span>
+    <span class="n">filter_2D</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span><span class="n">filter_1D</span><span class="p">,</span> <span class="p">(</span><span class="n">number_of_projections</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">filter_2D</span></div>
+
+
+
+<div class="viewcode-block" id="hamming_3D">
+<a class="viewcode-back" href="../../../../../pyronn.ct_reconstruction.helpers.filters.html#pyronn.ct_reconstruction.helpers.filters.filters.hamming_3D">[docs]</a>
+<span class="k">def</span> <span class="nf">hamming_3D</span><span class="p">(</span>
+    <span class="n">detector_shape</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">],</span>
+    <span class="n">detector_spacing</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">],</span>
+    <span class="n">number_of_projections</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">:</span>
+    <span class="n">detector_width</span> <span class="o">=</span> <span class="n">detector_shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">detector_spacing_width</span> <span class="o">=</span> <span class="n">detector_spacing</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="n">filter_1D</span> <span class="o">=</span> <span class="n">hamming</span><span class="p">(</span><span class="n">detector_width</span><span class="p">,</span> <span class="n">detector_spacing_width</span><span class="p">)</span>
+    <span class="n">filter_3D</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span>
+        <span class="n">filter_1D</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">detector_width</span><span class="p">),</span> <span class="p">(</span><span class="n">number_of_projections</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">filter_3D</span></div>
+
+
+
+<div class="viewcode-block" id="hann">
+<a class="viewcode-back" href="../../../../../pyronn.ct_reconstruction.helpers.filters.html#pyronn.ct_reconstruction.helpers.filters.filters.hann">[docs]</a>
+<span class="k">def</span> <span class="nf">hann</span><span class="p">(</span><span class="n">num_detectors</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">detector_spacing</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate the Hann filter in the frequency domain.&quot;&quot;&quot;</span>
+    <span class="n">frequencies</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fftfreq</span><span class="p">(</span><span class="n">num_detectors</span><span class="p">)</span>
+    <span class="n">ramp</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="p">(</span><span class="n">detector_spacing</span> <span class="o">*</span> <span class="n">detector_spacing</span><span class="p">)</span>
+    <span class="nb">filter</span> <span class="o">=</span> <span class="n">ramp</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">frequencies</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mf">0.5</span> <span class="o">+</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">frequencies</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="nb">filter</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="hann_2D">
+<a class="viewcode-back" href="../../../../../pyronn.ct_reconstruction.helpers.filters.html#pyronn.ct_reconstruction.helpers.filters.filters.hann_2D">[docs]</a>
+<span class="k">def</span> <span class="nf">hann_2D</span><span class="p">(</span>
+    <span class="n">detector_shape</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">],</span>
+    <span class="n">detector_spacing</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">],</span>
+    <span class="n">number_of_projections</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">:</span>
+    <span class="n">detector_width</span> <span class="o">=</span> <span class="n">detector_shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">detector_spacing_width</span> <span class="o">=</span> <span class="n">detector_spacing</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="n">filter_1D</span> <span class="o">=</span> <span class="n">hann</span><span class="p">(</span><span class="n">detector_width</span><span class="p">,</span> <span class="n">detector_spacing_width</span><span class="p">)</span>
+    <span class="n">filter_2D</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span><span class="n">filter_1D</span><span class="p">,</span> <span class="p">(</span><span class="n">number_of_projections</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">filter_2D</span></div>
+
+
+
+<div class="viewcode-block" id="hann_3D">
+<a class="viewcode-back" href="../../../../../pyronn.ct_reconstruction.helpers.filters.html#pyronn.ct_reconstruction.helpers.filters.filters.hann_3D">[docs]</a>
+<span class="k">def</span> <span class="nf">hann_3D</span><span class="p">(</span>
+    <span class="n">detector_shape</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">],</span>
+    <span class="n">detector_spacing</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">],</span>
+    <span class="n">number_of_projections</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">:</span>
+    <span class="n">detector_width</span> <span class="o">=</span> <span class="n">detector_shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">detector_spacing_width</span> <span class="o">=</span> <span class="n">detector_spacing</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="n">filter_1D</span> <span class="o">=</span> <span class="n">hann</span><span class="p">(</span><span class="n">detector_width</span><span class="p">,</span> <span class="n">detector_spacing_width</span><span class="p">)</span>
+    <span class="n">filter_3D</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span>
+        <span class="n">filter_1D</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">detector_width</span><span class="p">),</span> <span class="p">(</span><span class="n">number_of_projections</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">filter_3D</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Anshul Dhingra.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

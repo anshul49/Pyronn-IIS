@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pyronn.ct_reconstruction.layers.tensorflow.projection_3d &mdash; PyroNN 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../../../_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../../../_static/documentation_options.js?v=8d563738"></script>
+        <script src="../../../../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../../index.html" class="icon icon-home">
+            PyroNN
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"></div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../index.html">PyroNN</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../../index.html">Module code</a></li>
+          <li class="breadcrumb-item"><a href="../../../../pyronn.html">pyronn</a></li>
+          <li class="breadcrumb-item"><a href="../../../ct_reconstruction.html">pyronn.ct_reconstruction</a></li>
+      <li class="breadcrumb-item active">pyronn.ct_reconstruction.layers.tensorflow.projection_3d</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for pyronn.ct_reconstruction.layers.tensorflow.projection_3d</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright [2019] [Christopher Syben, Markus Michen]</span>
+<span class="c1">#</span>
+<span class="c1"># Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="c1"># you may not use this file except in compliance with the License.</span>
+<span class="c1"># You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#     http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1"># Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1"># distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1"># See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+
+<span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+<span class="kn">from</span> <span class="nn">tensorflow.python.framework</span> <span class="kn">import</span> <span class="n">ops</span>
+<span class="kn">import</span> <span class="nn">pyronn_layers</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1"># cone_projection3d</span>
+<div class="viewcode-block" id="cone_projection3d">
+<a class="viewcode-back" href="../../../../../pyronn.ct_reconstruction.layers.tensorflow.html#pyronn.ct_reconstruction.layers.tensorflow.projection_3d.cone_projection3d">[docs]</a>
+<span class="k">def</span> <span class="nf">cone_projection3d</span><span class="p">(</span><span class="n">volume</span><span class="p">,</span> <span class="n">geometry</span><span class="p">,</span> <span class="n">hardware_interp</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">step_size</span><span class="o">=</span><span class="mf">1.0</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Wrapper function for making the layer call.</span>
+<span class="sd">    Args:</span>
+<span class="sd">        volume:             Input volume to project.</span>
+<span class="sd">        geometry:           Corresponding GeometryCone3D Object defining parameters.</span>
+<span class="sd">        hardware_interp:    Controls if interpolation is done by GPU.</span>
+<span class="sd">        step_size:          step_size along ray direction in voxel.</span>
+<span class="sd">    Returns:</span>
+<span class="sd">            Initialized lme_custom_ops.cone_projection3d layer.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">batch</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">volume</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">pyronn_layers</span><span class="o">.</span><span class="n">cone_projection3d</span><span class="p">(</span><span class="n">volume</span><span class="p">,</span>
+                                           <span class="n">projection_shape</span><span class="o">=</span><span class="n">geometry</span><span class="o">.</span><span class="n">sinogram_shape</span><span class="p">,</span>
+                                           <span class="n">volume_origin</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">broadcast_to</span><span class="p">(</span><span class="n">geometry</span><span class="o">.</span><span class="n">volume_origin</span><span class="p">,</span> <span class="p">[</span><span class="n">batch</span><span class="p">,</span> <span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">geometry</span><span class="o">.</span><span class="n">volume_origin</span><span class="p">)]),</span>
+                                           <span class="n">volume_spacing</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">broadcast_to</span><span class="p">(</span><span class="n">geometry</span><span class="o">.</span><span class="n">volume_spacing</span><span class="p">,</span> <span class="p">[</span><span class="n">batch</span><span class="p">,</span> <span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">geometry</span><span class="o">.</span><span class="n">volume_spacing</span><span class="p">)]),</span>
+                                           <span class="n">projection_matrices</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">broadcast_to</span><span class="p">(</span><span class="n">geometry</span><span class="o">.</span><span class="n">trajectory</span><span class="p">,</span> <span class="p">[</span><span class="n">batch</span><span class="p">,</span> <span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">geometry</span><span class="o">.</span><span class="n">trajectory</span><span class="p">)]),</span>
+                                           <span class="n">step_size</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">broadcast_to</span><span class="p">(</span><span class="n">step_size</span><span class="p">,</span> <span class="p">[</span><span class="n">batch</span><span class="p">,</span> <span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">step_size</span><span class="p">)]),</span>
+                                           <span class="n">projection_multiplier</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">broadcast_to</span><span class="p">(</span><span class="n">geometry</span><span class="o">.</span><span class="n">projection_multiplier</span><span class="p">,</span> <span class="p">[</span><span class="n">batch</span><span class="p">,</span> <span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">geometry</span><span class="o">.</span><span class="n">projection_multiplier</span><span class="p">)]),</span>
+                                           <span class="n">hardware_interp</span><span class="o">=</span><span class="n">hardware_interp</span><span class="p">)</span></div>
+
+
+
+<span class="nd">@ops</span><span class="o">.</span><span class="n">RegisterGradient</span><span class="p">(</span><span class="s2">&quot;ConeProjection3D&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">_project_grad</span><span class="p">(</span><span class="n">op</span><span class="p">,</span> <span class="n">grad</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Compute the gradient of the projection op by invoking the backprojector.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">reco</span> <span class="o">=</span> <span class="n">pyronn_layers</span><span class="o">.</span><span class="n">cone_backprojection3d</span><span class="p">(</span>
+        <span class="n">sinogram</span><span class="o">=</span><span class="n">grad</span><span class="p">,</span>
+        <span class="n">volume_shape</span><span class="o">=</span><span class="n">op</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span>
+        <span class="n">volume_origin</span><span class="o">=</span><span class="n">op</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span>
+        <span class="n">volume_spacing</span><span class="o">=</span><span class="n">op</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span>
+        <span class="n">projection_matrices</span><span class="o">=</span><span class="n">op</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span>
+        <span class="n">step_size</span><span class="o">=</span><span class="n">op</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span>
+        <span class="n">projection_multiplier</span><span class="o">=</span><span class="n">op</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="mi">6</span><span class="p">],</span>
+        <span class="n">hardware_interp</span><span class="o">=</span><span class="n">op</span><span class="o">.</span><span class="n">get_attr</span><span class="p">(</span><span class="s2">&quot;hardware_interp&quot;</span><span class="p">)</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">reco</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">stop_gradient</span><span class="p">(</span><span class="n">op</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="n">tf</span><span class="o">.</span><span class="n">stop_gradient</span><span class="p">(</span><span class="n">op</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="mi">2</span><span class="p">]),</span> <span class="n">tf</span><span class="o">.</span><span class="n">stop_gradient</span><span class="p">(</span><span class="n">op</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="mi">3</span><span class="p">]),</span> <span class="n">tf</span><span class="o">.</span><span class="n">stop_gradient</span><span class="p">(</span><span class="n">op</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="mi">4</span><span class="p">]),</span> <span class="n">tf</span><span class="o">.</span><span class="n">stop_gradient</span><span class="p">(</span><span class="n">op</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="mi">5</span><span class="p">]),</span> <span class="n">tf</span><span class="o">.</span><span class="n">stop_gradient</span><span class="p">(</span><span class="n">op</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="mi">6</span><span class="p">])]</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Anshul Dhingra.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

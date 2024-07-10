@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pyronn.ct_reconstruction.geometry package &mdash; PyroNN 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=8d563738"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            PyroNN
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">pyronn.ct_reconstruction.geometry package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-pyronn.ct_reconstruction.geometry.geometry_base">pyronn.ct_reconstruction.geometry.geometry_base module</a><ul>
+<li><a class="reference internal" href="#pyronn.ct_reconstruction.geometry.geometry_base.GeometryBase"><code class="docutils literal notranslate"><span class="pre">GeometryBase</span></code></a><ul>
+<li><a class="reference internal" href="#pyronn.ct_reconstruction.geometry.geometry_base.GeometryBase.get_dict"><code class="docutils literal notranslate"><span class="pre">GeometryBase.get_dict()</span></code></a></li>
+<li><a class="reference internal" href="#pyronn.ct_reconstruction.geometry.geometry_base.GeometryBase.set_trajectory"><code class="docutils literal notranslate"><span class="pre">GeometryBase.set_trajectory()</span></code></a></li>
+<li><a class="reference internal" href="#pyronn.ct_reconstruction.geometry.geometry_base.GeometryBase.update"><code class="docutils literal notranslate"><span class="pre">GeometryBase.update()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#pyronn.ct_reconstruction.geometry.geometry_base.GeometryCone3D"><code class="docutils literal notranslate"><span class="pre">GeometryCone3D</span></code></a></li>
+<li><a class="reference internal" href="#pyronn.ct_reconstruction.geometry.geometry_base.GeometryFan2D"><code class="docutils literal notranslate"><span class="pre">GeometryFan2D</span></code></a></li>
+<li><a class="reference internal" href="#pyronn.ct_reconstruction.geometry.geometry_base.GeometryParallel2D"><code class="docutils literal notranslate"><span class="pre">GeometryParallel2D</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-pyronn.ct_reconstruction.geometry.geometry_specific">pyronn.ct_reconstruction.geometry.geometry_specific module</a><ul>
+<li><a class="reference internal" href="#pyronn.ct_reconstruction.geometry.geometry_specific.ArbitraryGeometrys3D"><code class="docutils literal notranslate"><span class="pre">ArbitraryGeometrys3D</span></code></a><ul>
+<li><a class="reference internal" href="#pyronn.ct_reconstruction.geometry.geometry_specific.ArbitraryGeometrys3D.create_sinogram"><code class="docutils literal notranslate"><span class="pre">ArbitraryGeometrys3D.create_sinogram()</span></code></a></li>
+<li><a class="reference internal" href="#pyronn.ct_reconstruction.geometry.geometry_specific.ArbitraryGeometrys3D.set_geo"><code class="docutils literal notranslate"><span class="pre">ArbitraryGeometrys3D.set_geo()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#pyronn.ct_reconstruction.geometry.geometry_specific.CircularGeometrys3D"><code class="docutils literal notranslate"><span class="pre">CircularGeometrys3D</span></code></a><ul>
+<li><a class="reference internal" href="#pyronn.ct_reconstruction.geometry.geometry_specific.CircularGeometrys3D.create_sinogram"><code class="docutils literal notranslate"><span class="pre">CircularGeometrys3D.create_sinogram()</span></code></a></li>
+<li><a class="reference internal" href="#pyronn.ct_reconstruction.geometry.geometry_specific.CircularGeometrys3D.set_geo"><code class="docutils literal notranslate"><span class="pre">CircularGeometrys3D.set_geo()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#pyronn.ct_reconstruction.geometry.geometry_specific.SpecificGeometry"><code class="docutils literal notranslate"><span class="pre">SpecificGeometry</span></code></a><ul>
+<li><a class="reference internal" href="#pyronn.ct_reconstruction.geometry.geometry_specific.SpecificGeometry.create_sinogram"><code class="docutils literal notranslate"><span class="pre">SpecificGeometry.create_sinogram()</span></code></a></li>
+<li><a class="reference internal" href="#pyronn.ct_reconstruction.geometry.geometry_specific.SpecificGeometry.generate_specific_phantom"><code class="docutils literal notranslate"><span class="pre">SpecificGeometry.generate_specific_phantom()</span></code></a></li>
+<li><a class="reference internal" href="#pyronn.ct_reconstruction.geometry.geometry_specific.SpecificGeometry.set_geo"><code class="docutils literal notranslate"><span class="pre">SpecificGeometry.set_geo()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-pyronn.ct_reconstruction.geometry">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">PyroNN</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">pyronn.ct_reconstruction.geometry package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/pyronn.ct_reconstruction.geometry.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="pyronn-ct-reconstruction-geometry-package">
+<h1>pyronn.ct_reconstruction.geometry package<a class="headerlink" href="#pyronn-ct-reconstruction-geometry-package" title="Link to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+</section>
+<section id="module-pyronn.ct_reconstruction.geometry.geometry_base">
+<span id="pyronn-ct-reconstruction-geometry-geometry-base-module"></span><h2>pyronn.ct_reconstruction.geometry.geometry_base module<a class="headerlink" href="#module-pyronn.ct_reconstruction.geometry.geometry_base" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="pyronn.ct_reconstruction.geometry.geometry_base.GeometryBase">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyronn.ct_reconstruction.geometry.geometry_base.</span></span><span class="sig-name descname"><span class="pre">GeometryBase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">volume_shape</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">volume_spacing</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">detector_shape</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">detector_spacing</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number_of_projections</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">angular_range</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source_detector_distance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source_isocenter_distance</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyronn/ct_reconstruction/geometry/geometry_base.html#GeometryBase"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyronn.ct_reconstruction.geometry.geometry_base.GeometryBase" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>The Base Class for the different Geometry classes. Provides commonly used members.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pyronn.ct_reconstruction.geometry.geometry_base.GeometryBase.get_dict">
+<span class="sig-name descname"><span class="pre">get_dict</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyronn/ct_reconstruction/geometry/geometry_base.html#GeometryBase.get_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyronn.ct_reconstruction.geometry.geometry_base.GeometryBase.get_dict" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyronn.ct_reconstruction.geometry.geometry_base.GeometryBase.set_trajectory">
+<span class="sig-name descname"><span class="pre">set_trajectory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">trajectory</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyronn/ct_reconstruction/geometry/geometry_base.html#GeometryBase.set_trajectory"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyronn.ct_reconstruction.geometry.geometry_base.GeometryBase.set_trajectory" title="Link to this definition"></a></dt>
+<dd><blockquote>
+<div><p>Sets the member trajectory.</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>trajectory</strong> – np.array defining the trajectory.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyronn.ct_reconstruction.geometry.geometry_base.GeometryBase.update">
+<span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyronn/ct_reconstruction/geometry/geometry_base.html#GeometryBase.update"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyronn.ct_reconstruction.geometry.geometry_base.GeometryBase.update" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pyronn.ct_reconstruction.geometry.geometry_base.GeometryCone3D">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyronn.ct_reconstruction.geometry.geometry_base.</span></span><span class="sig-name descname"><span class="pre">GeometryCone3D</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">volume_shape</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">volume_spacing</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">detector_shape</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">detector_spacing</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number_of_projections</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">angular_range</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source_detector_distance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source_isocenter_distance</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyronn/ct_reconstruction/geometry/geometry_base.html#GeometryCone3D"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyronn.ct_reconstruction.geometry.geometry_base.GeometryCone3D" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pyronn.ct_reconstruction.geometry.geometry_base.GeometryBase" title="pyronn.ct_reconstruction.geometry.geometry_base.GeometryBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">GeometryBase</span></code></a></p>
+<p>3D Cone specialization of Geometry.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pyronn.ct_reconstruction.geometry.geometry_base.GeometryFan2D">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyronn.ct_reconstruction.geometry.geometry_base.</span></span><span class="sig-name descname"><span class="pre">GeometryFan2D</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">volume_shape</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">volume_spacing</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">detector_shape</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">detector_spacing</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number_of_projections</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">angular_range</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source_detector_distance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source_isocenter_distance</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyronn/ct_reconstruction/geometry/geometry_base.html#GeometryFan2D"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyronn.ct_reconstruction.geometry.geometry_base.GeometryFan2D" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pyronn.ct_reconstruction.geometry.geometry_base.GeometryBase" title="pyronn.ct_reconstruction.geometry.geometry_base.GeometryBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">GeometryBase</span></code></a></p>
+<p>2D Fan specialization of Geometry.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pyronn.ct_reconstruction.geometry.geometry_base.GeometryParallel2D">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyronn.ct_reconstruction.geometry.geometry_base.</span></span><span class="sig-name descname"><span class="pre">GeometryParallel2D</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">volume_shape</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">volume_spacing</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">detector_shape</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">detector_spacing</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number_of_projections</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">angular_range</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyronn/ct_reconstruction/geometry/geometry_base.html#GeometryParallel2D"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyronn.ct_reconstruction.geometry.geometry_base.GeometryParallel2D" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pyronn.ct_reconstruction.geometry.geometry_base.GeometryBase" title="pyronn.ct_reconstruction.geometry.geometry_base.GeometryBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">GeometryBase</span></code></a></p>
+<p>2D Parallel specialization of Geometry.</p>
+</dd></dl>
+
+</section>
+<section id="module-pyronn.ct_reconstruction.geometry.geometry_specific">
+<span id="pyronn-ct-reconstruction-geometry-geometry-specific-module"></span><h2>pyronn.ct_reconstruction.geometry.geometry_specific module<a class="headerlink" href="#module-pyronn.ct_reconstruction.geometry.geometry_specific" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="pyronn.ct_reconstruction.geometry.geometry_specific.ArbitraryGeometrys3D">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyronn.ct_reconstruction.geometry.geometry_specific.</span></span><span class="sig-name descname"><span class="pre">ArbitraryGeometrys3D</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">geo_dict_info</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyronn/ct_reconstruction/geometry/geometry_specific.html#ArbitraryGeometrys3D"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyronn.ct_reconstruction.geometry.geometry_specific.ArbitraryGeometrys3D" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pyronn.ct_reconstruction.geometry.geometry_specific.SpecificGeometry" title="pyronn.ct_reconstruction.geometry.geometry_specific.SpecificGeometry"><code class="xref py py-class docutils literal notranslate"><span class="pre">SpecificGeometry</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pyronn.ct_reconstruction.geometry.geometry_specific.ArbitraryGeometrys3D.create_sinogram">
+<span class="sig-name descname"><span class="pre">create_sinogram</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">phantom</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyronn/ct_reconstruction/geometry/geometry_specific.html#ArbitraryGeometrys3D.create_sinogram"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyronn.ct_reconstruction.geometry.geometry_specific.ArbitraryGeometrys3D.create_sinogram" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyronn.ct_reconstruction.geometry.geometry_specific.ArbitraryGeometrys3D.set_geo">
+<span class="sig-name descname"><span class="pre">set_geo</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyronn/ct_reconstruction/geometry/geometry_specific.html#ArbitraryGeometrys3D.set_geo"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyronn.ct_reconstruction.geometry.geometry_specific.ArbitraryGeometrys3D.set_geo" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pyronn.ct_reconstruction.geometry.geometry_specific.CircularGeometrys3D">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyronn.ct_reconstruction.geometry.geometry_specific.</span></span><span class="sig-name descname"><span class="pre">CircularGeometrys3D</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">geo_dict_info</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyronn/ct_reconstruction/geometry/geometry_specific.html#CircularGeometrys3D"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyronn.ct_reconstruction.geometry.geometry_specific.CircularGeometrys3D" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pyronn.ct_reconstruction.geometry.geometry_specific.SpecificGeometry" title="pyronn.ct_reconstruction.geometry.geometry_specific.SpecificGeometry"><code class="xref py py-class docutils literal notranslate"><span class="pre">SpecificGeometry</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pyronn.ct_reconstruction.geometry.geometry_specific.CircularGeometrys3D.create_sinogram">
+<span class="sig-name descname"><span class="pre">create_sinogram</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">phantom</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyronn/ct_reconstruction/geometry/geometry_specific.html#CircularGeometrys3D.create_sinogram"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyronn.ct_reconstruction.geometry.geometry_specific.CircularGeometrys3D.create_sinogram" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyronn.ct_reconstruction.geometry.geometry_specific.CircularGeometrys3D.set_geo">
+<span class="sig-name descname"><span class="pre">set_geo</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyronn/ct_reconstruction/geometry/geometry_specific.html#CircularGeometrys3D.set_geo"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyronn.ct_reconstruction.geometry.geometry_specific.CircularGeometrys3D.set_geo" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pyronn.ct_reconstruction.geometry.geometry_specific.SpecificGeometry">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyronn.ct_reconstruction.geometry.geometry_specific.</span></span><span class="sig-name descname"><span class="pre">SpecificGeometry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">geo_info_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">traj_func</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyronn/ct_reconstruction/geometry/geometry_specific.html#SpecificGeometry"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyronn.ct_reconstruction.geometry.geometry_specific.SpecificGeometry" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ABC</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pyronn.ct_reconstruction.geometry.geometry_specific.SpecificGeometry.create_sinogram">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">create_sinogram</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">phantom</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyronn/ct_reconstruction/geometry/geometry_specific.html#SpecificGeometry.create_sinogram"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyronn.ct_reconstruction.geometry.geometry_specific.SpecificGeometry.create_sinogram" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyronn.ct_reconstruction.geometry.geometry_specific.SpecificGeometry.generate_specific_phantom">
+<span class="sig-name descname"><span class="pre">generate_specific_phantom</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">phantom_func</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyronn/ct_reconstruction/geometry/geometry_specific.html#SpecificGeometry.generate_specific_phantom"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyronn.ct_reconstruction.geometry.geometry_specific.SpecificGeometry.generate_specific_phantom" title="Link to this definition"></a></dt>
+<dd><p>Generates a phantom created by the given function and its corresponding sinogram.</p>
+<p>The method first creates a phantom based on the volume shape specified in the
+geometry attribute of the class. It then computes the sinogram by applying a forward projection.
+The projection is calculated based on the parameters defined in the
+geometry attribute, including the detector shape, spacing, and the source-detector configuration.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A tuple containing two numpy arrays. The first array is the generated
+3D mask of the phantom, and the second array is the corresponding 3D sinogram obtained through
+the cone beam forward projection.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Tuple[np.array, np.array]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyronn.ct_reconstruction.geometry.geometry_specific.SpecificGeometry.set_geo">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">set_geo</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyronn/ct_reconstruction/geometry/geometry_specific.html#SpecificGeometry.set_geo"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyronn.ct_reconstruction.geometry.geometry_specific.SpecificGeometry.set_geo" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-pyronn.ct_reconstruction.geometry">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-pyronn.ct_reconstruction.geometry" title="Link to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Anshul Dhingra.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

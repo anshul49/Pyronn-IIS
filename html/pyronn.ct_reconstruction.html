@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pyronn.ct_reconstruction package &mdash; PyroNN 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=8d563738"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            PyroNN
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">pyronn.ct_reconstruction package</a><ul>
+<li><a class="reference internal" href="#subpackages">Subpackages</a></li>
+<li><a class="reference internal" href="#module-pyronn.ct_reconstruction">Module contents</a><ul>
+<li><a class="reference internal" href="#pyronn.ct_reconstruction.default_config"><code class="docutils literal notranslate"><span class="pre">default_config()</span></code></a></li>
+<li><a class="reference internal" href="#pyronn.ct_reconstruction.read_backend"><code class="docutils literal notranslate"><span class="pre">read_backend()</span></code></a></li>
+<li><a class="reference internal" href="#pyronn.ct_reconstruction.set_backend"><code class="docutils literal notranslate"><span class="pre">set_backend()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">PyroNN</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">pyronn.ct_reconstruction package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/pyronn.ct_reconstruction.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="pyronn-ct-reconstruction-package">
+<h1>pyronn.ct_reconstruction package<a class="headerlink" href="#pyronn-ct-reconstruction-package" title="Link to this heading"></a></h1>
+<section id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="pyronn.ct_reconstruction.geometry.html">pyronn.ct_reconstruction.geometry package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pyronn.ct_reconstruction.geometry.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyronn.ct_reconstruction.geometry.html#module-pyronn.ct_reconstruction.geometry.geometry_base">pyronn.ct_reconstruction.geometry.geometry_base module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="pyronn.ct_reconstruction.geometry.html#pyronn.ct_reconstruction.geometry.geometry_base.GeometryBase"><code class="docutils literal notranslate"><span class="pre">GeometryBase</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pyronn.ct_reconstruction.geometry.html#pyronn.ct_reconstruction.geometry.geometry_base.GeometryBase.get_dict"><code class="docutils literal notranslate"><span class="pre">GeometryBase.get_dict()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyronn.ct_reconstruction.geometry.html#pyronn.ct_reconstruction.geometry.geometry_base.GeometryBase.set_trajectory"><code class="docutils literal notranslate"><span class="pre">GeometryBase.set_trajectory()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyronn.ct_reconstruction.geometry.html#pyronn.ct_reconstruction.geometry.geometry_base.GeometryBase.update"><code class="docutils literal notranslate"><span class="pre">GeometryBase.update()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pyronn.ct_reconstruction.geometry.html#pyronn.ct_reconstruction.geometry.geometry_base.GeometryCone3D"><code class="docutils literal notranslate"><span class="pre">GeometryCone3D</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyronn.ct_reconstruction.geometry.html#pyronn.ct_reconstruction.geometry.geometry_base.GeometryFan2D"><code class="docutils literal notranslate"><span class="pre">GeometryFan2D</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyronn.ct_reconstruction.geometry.html#pyronn.ct_reconstruction.geometry.geometry_base.GeometryParallel2D"><code class="docutils literal notranslate"><span class="pre">GeometryParallel2D</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="pyronn.ct_reconstruction.geometry.html#module-pyronn.ct_reconstruction.geometry.geometry_specific">pyronn.ct_reconstruction.geometry.geometry_specific module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="pyronn.ct_reconstruction.geometry.html#pyronn.ct_reconstruction.geometry.geometry_specific.ArbitraryGeometrys3D"><code class="docutils literal notranslate"><span class="pre">ArbitraryGeometrys3D</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pyronn.ct_reconstruction.geometry.html#pyronn.ct_reconstruction.geometry.geometry_specific.ArbitraryGeometrys3D.create_sinogram"><code class="docutils literal notranslate"><span class="pre">ArbitraryGeometrys3D.create_sinogram()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyronn.ct_reconstruction.geometry.html#pyronn.ct_reconstruction.geometry.geometry_specific.ArbitraryGeometrys3D.set_geo"><code class="docutils literal notranslate"><span class="pre">ArbitraryGeometrys3D.set_geo()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pyronn.ct_reconstruction.geometry.html#pyronn.ct_reconstruction.geometry.geometry_specific.CircularGeometrys3D"><code class="docutils literal notranslate"><span class="pre">CircularGeometrys3D</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pyronn.ct_reconstruction.geometry.html#pyronn.ct_reconstruction.geometry.geometry_specific.CircularGeometrys3D.create_sinogram"><code class="docutils literal notranslate"><span class="pre">CircularGeometrys3D.create_sinogram()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyronn.ct_reconstruction.geometry.html#pyronn.ct_reconstruction.geometry.geometry_specific.CircularGeometrys3D.set_geo"><code class="docutils literal notranslate"><span class="pre">CircularGeometrys3D.set_geo()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pyronn.ct_reconstruction.geometry.html#pyronn.ct_reconstruction.geometry.geometry_specific.SpecificGeometry"><code class="docutils literal notranslate"><span class="pre">SpecificGeometry</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pyronn.ct_reconstruction.geometry.html#pyronn.ct_reconstruction.geometry.geometry_specific.SpecificGeometry.create_sinogram"><code class="docutils literal notranslate"><span class="pre">SpecificGeometry.create_sinogram()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyronn.ct_reconstruction.geometry.html#pyronn.ct_reconstruction.geometry.geometry_specific.SpecificGeometry.generate_specific_phantom"><code class="docutils literal notranslate"><span class="pre">SpecificGeometry.generate_specific_phantom()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyronn.ct_reconstruction.geometry.html#pyronn.ct_reconstruction.geometry.geometry_specific.SpecificGeometry.set_geo"><code class="docutils literal notranslate"><span class="pre">SpecificGeometry.set_geo()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="pyronn.ct_reconstruction.geometry.html#module-pyronn.ct_reconstruction.geometry">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pyronn.ct_reconstruction.helpers.html">pyronn.ct_reconstruction.helpers package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pyronn.ct_reconstruction.helpers.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="pyronn.ct_reconstruction.helpers.filters.html">pyronn.ct_reconstruction.helpers.filters package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pyronn.ct_reconstruction.helpers.filters.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyronn.ct_reconstruction.helpers.filters.html#module-pyronn.ct_reconstruction.helpers.filters.filters">pyronn.ct_reconstruction.helpers.filters.filters module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyronn.ct_reconstruction.helpers.filters.html#module-pyronn.ct_reconstruction.helpers.filters.weights">pyronn.ct_reconstruction.helpers.filters.weights module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyronn.ct_reconstruction.helpers.filters.html#module-pyronn.ct_reconstruction.helpers.filters">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pyronn.ct_reconstruction.helpers.misc.html">pyronn.ct_reconstruction.helpers.misc package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pyronn.ct_reconstruction.helpers.misc.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyronn.ct_reconstruction.helpers.misc.html#module-pyronn.ct_reconstruction.helpers.misc.general_utils">pyronn.ct_reconstruction.helpers.misc.general_utils module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyronn.ct_reconstruction.helpers.misc.html#module-pyronn.ct_reconstruction.helpers.misc">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pyronn.ct_reconstruction.helpers.phantoms.html">pyronn.ct_reconstruction.helpers.phantoms package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pyronn.ct_reconstruction.helpers.phantoms.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyronn.ct_reconstruction.helpers.phantoms.html#module-pyronn.ct_reconstruction.helpers.phantoms.primitives_2d">pyronn.ct_reconstruction.helpers.phantoms.primitives_2d module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyronn.ct_reconstruction.helpers.phantoms.html#module-pyronn.ct_reconstruction.helpers.phantoms.primitives_3d">pyronn.ct_reconstruction.helpers.phantoms.primitives_3d module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyronn.ct_reconstruction.helpers.phantoms.html#module-pyronn.ct_reconstruction.helpers.phantoms.shepp_logan">pyronn.ct_reconstruction.helpers.phantoms.shepp_logan module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyronn.ct_reconstruction.helpers.phantoms.html#module-pyronn.ct_reconstruction.helpers.phantoms">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pyronn.ct_reconstruction.helpers.trajectories.html">pyronn.ct_reconstruction.helpers.trajectories package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pyronn.ct_reconstruction.helpers.trajectories.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyronn.ct_reconstruction.helpers.trajectories.html#module-pyronn.ct_reconstruction.helpers.trajectories.arbitrary_trajectory">pyronn.ct_reconstruction.helpers.trajectories.arbitrary_trajectory module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyronn.ct_reconstruction.helpers.trajectories.html#module-pyronn.ct_reconstruction.helpers.trajectories.circular_trajectory">pyronn.ct_reconstruction.helpers.trajectories.circular_trajectory module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyronn.ct_reconstruction.helpers.trajectories.html#module-pyronn.ct_reconstruction.helpers.trajectories">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="pyronn.ct_reconstruction.helpers.html#module-pyronn.ct_reconstruction.helpers">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pyronn.ct_reconstruction.layers.html">pyronn.ct_reconstruction.layers package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pyronn.ct_reconstruction.layers.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="pyronn.ct_reconstruction.layers.tensorflow.html">pyronn.ct_reconstruction.layers.tensorflow package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pyronn.ct_reconstruction.layers.tensorflow.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyronn.ct_reconstruction.layers.tensorflow.html#module-pyronn.ct_reconstruction.layers.tensorflow.backprojection_2d">pyronn.ct_reconstruction.layers.tensorflow.backprojection_2d module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyronn.ct_reconstruction.layers.tensorflow.html#module-pyronn.ct_reconstruction.layers.tensorflow.backprojection_3d">pyronn.ct_reconstruction.layers.tensorflow.backprojection_3d module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyronn.ct_reconstruction.layers.tensorflow.html#module-pyronn.ct_reconstruction.layers.tensorflow.projection_2d">pyronn.ct_reconstruction.layers.tensorflow.projection_2d module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyronn.ct_reconstruction.layers.tensorflow.html#module-pyronn.ct_reconstruction.layers.tensorflow.projection_3d">pyronn.ct_reconstruction.layers.tensorflow.projection_3d module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyronn.ct_reconstruction.layers.tensorflow.html#module-pyronn.ct_reconstruction.layers.tensorflow">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pyronn.ct_reconstruction.layers.torch.html">pyronn.ct_reconstruction.layers.torch package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pyronn.ct_reconstruction.layers.torch.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyronn.ct_reconstruction.layers.torch.html#module-pyronn.ct_reconstruction.layers.torch.backprojection_2d">pyronn.ct_reconstruction.layers.torch.backprojection_2d module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyronn.ct_reconstruction.layers.torch.html#module-pyronn.ct_reconstruction.layers.torch.backprojection_3d">pyronn.ct_reconstruction.layers.torch.backprojection_3d module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyronn.ct_reconstruction.layers.torch.html#module-pyronn.ct_reconstruction.layers.torch.projection_2d">pyronn.ct_reconstruction.layers.torch.projection_2d module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyronn.ct_reconstruction.layers.torch.html#module-pyronn.ct_reconstruction.layers.torch.projection_3d">pyronn.ct_reconstruction.layers.torch.projection_3d module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyronn.ct_reconstruction.layers.torch.html#pyronn-ct-reconstruction-layers-torch-reconstruction-module">pyronn.ct_reconstruction.layers.torch.reconstruction module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyronn.ct_reconstruction.layers.torch.html#module-pyronn.ct_reconstruction.layers.torch">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="pyronn.ct_reconstruction.layers.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyronn.ct_reconstruction.layers.html#module-pyronn.ct_reconstruction.layers.backprojection_2d">pyronn.ct_reconstruction.layers.backprojection_2d module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="pyronn.ct_reconstruction.layers.html#pyronn.ct_reconstruction.layers.backprojection_2d.FanBackProjectionFor2D"><code class="docutils literal notranslate"><span class="pre">FanBackProjectionFor2D</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pyronn.ct_reconstruction.layers.html#pyronn.ct_reconstruction.layers.backprojection_2d.FanBackProjectionFor2D.forward"><code class="docutils literal notranslate"><span class="pre">FanBackProjectionFor2D.forward()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pyronn.ct_reconstruction.layers.html#pyronn.ct_reconstruction.layers.backprojection_2d.ParallelBackProjectionFor2D"><code class="docutils literal notranslate"><span class="pre">ParallelBackProjectionFor2D</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pyronn.ct_reconstruction.layers.html#pyronn.ct_reconstruction.layers.backprojection_2d.ParallelBackProjectionFor2D.forward"><code class="docutils literal notranslate"><span class="pre">ParallelBackProjectionFor2D.forward()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="pyronn.ct_reconstruction.layers.html#module-pyronn.ct_reconstruction.layers.backprojection_3d">pyronn.ct_reconstruction.layers.backprojection_3d module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="pyronn.ct_reconstruction.layers.html#pyronn.ct_reconstruction.layers.backprojection_3d.ConeBackProjectionFor3D"><code class="docutils literal notranslate"><span class="pre">ConeBackProjectionFor3D</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pyronn.ct_reconstruction.layers.html#pyronn.ct_reconstruction.layers.backprojection_3d.ConeBackProjectionFor3D.forward"><code class="docutils literal notranslate"><span class="pre">ConeBackProjectionFor3D.forward()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="pyronn.ct_reconstruction.layers.html#module-pyronn.ct_reconstruction.layers.projection_2d">pyronn.ct_reconstruction.layers.projection_2d module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="pyronn.ct_reconstruction.layers.html#pyronn.ct_reconstruction.layers.projection_2d.FanProjectionFor2D"><code class="docutils literal notranslate"><span class="pre">FanProjectionFor2D</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pyronn.ct_reconstruction.layers.html#pyronn.ct_reconstruction.layers.projection_2d.FanProjectionFor2D.forward"><code class="docutils literal notranslate"><span class="pre">FanProjectionFor2D.forward()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pyronn.ct_reconstruction.layers.html#pyronn.ct_reconstruction.layers.projection_2d.ParallelProjectionFor2D"><code class="docutils literal notranslate"><span class="pre">ParallelProjectionFor2D</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pyronn.ct_reconstruction.layers.html#pyronn.ct_reconstruction.layers.projection_2d.ParallelProjectionFor2D.forward"><code class="docutils literal notranslate"><span class="pre">ParallelProjectionFor2D.forward()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="pyronn.ct_reconstruction.layers.html#module-pyronn.ct_reconstruction.layers.projection_3d">pyronn.ct_reconstruction.layers.projection_3d module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="pyronn.ct_reconstruction.layers.html#pyronn.ct_reconstruction.layers.projection_3d.ConeProjectionFor3D"><code class="docutils literal notranslate"><span class="pre">ConeProjectionFor3D</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pyronn.ct_reconstruction.layers.html#pyronn.ct_reconstruction.layers.projection_3d.ConeProjectionFor3D.forward"><code class="docutils literal notranslate"><span class="pre">ConeProjectionFor3D.forward()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pyronn.ct_reconstruction.layers.html#pyronn.ct_reconstruction.layers.projection_3d.Projection3D"><code class="docutils literal notranslate"><span class="pre">Projection3D</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pyronn.ct_reconstruction.layers.html#pyronn.ct_reconstruction.layers.projection_3d.Projection3D.forward"><code class="docutils literal notranslate"><span class="pre">Projection3D.forward()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="pyronn.ct_reconstruction.layers.html#module-pyronn.ct_reconstruction.layers">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="module-pyronn.ct_reconstruction">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-pyronn.ct_reconstruction" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="pyronn.ct_reconstruction.default_config">
+<span class="sig-prename descclassname"><span class="pre">pyronn.ct_reconstruction.</span></span><span class="sig-name descname"><span class="pre">default_config</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyronn/ct_reconstruction.html#default_config"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyronn.ct_reconstruction.default_config" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyronn.ct_reconstruction.read_backend">
+<span class="sig-prename descclassname"><span class="pre">pyronn.ct_reconstruction.</span></span><span class="sig-name descname"><span class="pre">read_backend</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyronn/ct_reconstruction.html#read_backend"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyronn.ct_reconstruction.read_backend" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyronn.ct_reconstruction.set_backend">
+<span class="sig-prename descclassname"><span class="pre">pyronn.ct_reconstruction.</span></span><span class="sig-name descname"><span class="pre">set_backend</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyronn/ct_reconstruction.html#set_backend"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyronn.ct_reconstruction.set_backend" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Anshul Dhingra.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
