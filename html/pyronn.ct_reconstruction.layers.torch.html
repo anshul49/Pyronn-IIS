@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pyronn.ct_reconstruction.layers.torch package &mdash; PyroNN 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=8d563738"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            PyroNN
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">pyronn.ct_reconstruction.layers.torch package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-pyronn.ct_reconstruction.layers.torch.backprojection_2d">pyronn.ct_reconstruction.layers.torch.backprojection_2d module</a><ul>
+<li><a class="reference internal" href="#pyronn.ct_reconstruction.layers.torch.backprojection_2d.FanBackProjection2D"><code class="docutils literal notranslate"><span class="pre">FanBackProjection2D</span></code></a><ul>
+<li><a class="reference internal" href="#pyronn.ct_reconstruction.layers.torch.backprojection_2d.FanBackProjection2D.forward"><code class="docutils literal notranslate"><span class="pre">FanBackProjection2D.forward()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#pyronn.ct_reconstruction.layers.torch.backprojection_2d.FanBackProjection2DFunction"><code class="docutils literal notranslate"><span class="pre">FanBackProjection2DFunction</span></code></a><ul>
+<li><a class="reference internal" href="#pyronn.ct_reconstruction.layers.torch.backprojection_2d.FanBackProjection2DFunction.backward"><code class="docutils literal notranslate"><span class="pre">FanBackProjection2DFunction.backward()</span></code></a></li>
+<li><a class="reference internal" href="#pyronn.ct_reconstruction.layers.torch.backprojection_2d.FanBackProjection2DFunction.forward"><code class="docutils literal notranslate"><span class="pre">FanBackProjection2DFunction.forward()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#pyronn.ct_reconstruction.layers.torch.backprojection_2d.ParallelBackProjection2D"><code class="docutils literal notranslate"><span class="pre">ParallelBackProjection2D</span></code></a><ul>
+<li><a class="reference internal" href="#pyronn.ct_reconstruction.layers.torch.backprojection_2d.ParallelBackProjection2D.forward"><code class="docutils literal notranslate"><span class="pre">ParallelBackProjection2D.forward()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#pyronn.ct_reconstruction.layers.torch.backprojection_2d.ParallelBackProjection2DFunction"><code class="docutils literal notranslate"><span class="pre">ParallelBackProjection2DFunction</span></code></a><ul>
+<li><a class="reference internal" href="#pyronn.ct_reconstruction.layers.torch.backprojection_2d.ParallelBackProjection2DFunction.backward"><code class="docutils literal notranslate"><span class="pre">ParallelBackProjection2DFunction.backward()</span></code></a></li>
+<li><a class="reference internal" href="#pyronn.ct_reconstruction.layers.torch.backprojection_2d.ParallelBackProjection2DFunction.forward"><code class="docutils literal notranslate"><span class="pre">ParallelBackProjection2DFunction.forward()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-pyronn.ct_reconstruction.layers.torch.backprojection_3d">pyronn.ct_reconstruction.layers.torch.backprojection_3d module</a><ul>
+<li><a class="reference internal" href="#pyronn.ct_reconstruction.layers.torch.backprojection_3d.ConeBackProjection3D"><code class="docutils literal notranslate"><span class="pre">ConeBackProjection3D</span></code></a><ul>
+<li><a class="reference internal" href="#pyronn.ct_reconstruction.layers.torch.backprojection_3d.ConeBackProjection3D.forward"><code class="docutils literal notranslate"><span class="pre">ConeBackProjection3D.forward()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#pyronn.ct_reconstruction.layers.torch.backprojection_3d.ConeBackProjection3DFunction"><code class="docutils literal notranslate"><span class="pre">ConeBackProjection3DFunction</span></code></a><ul>
+<li><a class="reference internal" href="#pyronn.ct_reconstruction.layers.torch.backprojection_3d.ConeBackProjection3DFunction.backward"><code class="docutils literal notranslate"><span class="pre">ConeBackProjection3DFunction.backward()</span></code></a></li>
+<li><a class="reference internal" href="#pyronn.ct_reconstruction.layers.torch.backprojection_3d.ConeBackProjection3DFunction.forward"><code class="docutils literal notranslate"><span class="pre">ConeBackProjection3DFunction.forward()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-pyronn.ct_reconstruction.layers.torch.projection_2d">pyronn.ct_reconstruction.layers.torch.projection_2d module</a><ul>
+<li><a class="reference internal" href="#pyronn.ct_reconstruction.layers.torch.projection_2d.FanProjection2D"><code class="docutils literal notranslate"><span class="pre">FanProjection2D</span></code></a><ul>
+<li><a class="reference internal" href="#pyronn.ct_reconstruction.layers.torch.projection_2d.FanProjection2D.forward"><code class="docutils literal notranslate"><span class="pre">FanProjection2D.forward()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#pyronn.ct_reconstruction.layers.torch.projection_2d.FanProjection2DFunction"><code class="docutils literal notranslate"><span class="pre">FanProjection2DFunction</span></code></a><ul>
+<li><a class="reference internal" href="#pyronn.ct_reconstruction.layers.torch.projection_2d.FanProjection2DFunction.backward"><code class="docutils literal notranslate"><span class="pre">FanProjection2DFunction.backward()</span></code></a></li>
+<li><a class="reference internal" href="#pyronn.ct_reconstruction.layers.torch.projection_2d.FanProjection2DFunction.forward"><code class="docutils literal notranslate"><span class="pre">FanProjection2DFunction.forward()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#pyronn.ct_reconstruction.layers.torch.projection_2d.ParallelProjection2D"><code class="docutils literal notranslate"><span class="pre">ParallelProjection2D</span></code></a><ul>
+<li><a class="reference internal" href="#pyronn.ct_reconstruction.layers.torch.projection_2d.ParallelProjection2D.forward"><code class="docutils literal notranslate"><span class="pre">ParallelProjection2D.forward()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#pyronn.ct_reconstruction.layers.torch.projection_2d.ParallelProjection2DFunction"><code class="docutils literal notranslate"><span class="pre">ParallelProjection2DFunction</span></code></a><ul>
+<li><a class="reference internal" href="#pyronn.ct_reconstruction.layers.torch.projection_2d.ParallelProjection2DFunction.backward"><code class="docutils literal notranslate"><span class="pre">ParallelProjection2DFunction.backward()</span></code></a></li>
+<li><a class="reference internal" href="#pyronn.ct_reconstruction.layers.torch.projection_2d.ParallelProjection2DFunction.forward"><code class="docutils literal notranslate"><span class="pre">ParallelProjection2DFunction.forward()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-pyronn.ct_reconstruction.layers.torch.projection_3d">pyronn.ct_reconstruction.layers.torch.projection_3d module</a><ul>
+<li><a class="reference internal" href="#pyronn.ct_reconstruction.layers.torch.projection_3d.ConeProjection3D"><code class="docutils literal notranslate"><span class="pre">ConeProjection3D</span></code></a><ul>
+<li><a class="reference internal" href="#pyronn.ct_reconstruction.layers.torch.projection_3d.ConeProjection3D.forward"><code class="docutils literal notranslate"><span class="pre">ConeProjection3D.forward()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#pyronn.ct_reconstruction.layers.torch.projection_3d.ConeProjection3DFunction"><code class="docutils literal notranslate"><span class="pre">ConeProjection3DFunction</span></code></a><ul>
+<li><a class="reference internal" href="#pyronn.ct_reconstruction.layers.torch.projection_3d.ConeProjection3DFunction.backward"><code class="docutils literal notranslate"><span class="pre">ConeProjection3DFunction.backward()</span></code></a></li>
+<li><a class="reference internal" href="#pyronn.ct_reconstruction.layers.torch.projection_3d.ConeProjection3DFunction.forward"><code class="docutils literal notranslate"><span class="pre">ConeProjection3DFunction.forward()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#pyronn-ct-reconstruction-layers-torch-reconstruction-module">pyronn.ct_reconstruction.layers.torch.reconstruction module</a></li>
+<li><a class="reference internal" href="#module-pyronn.ct_reconstruction.layers.torch">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">PyroNN</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">pyronn.ct_reconstruction.layers.torch package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/pyronn.ct_reconstruction.layers.torch.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="pyronn-ct-reconstruction-layers-torch-package">
+<h1>pyronn.ct_reconstruction.layers.torch package<a class="headerlink" href="#pyronn-ct-reconstruction-layers-torch-package" title="Link to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+</section>
+<section id="module-pyronn.ct_reconstruction.layers.torch.backprojection_2d">
+<span id="pyronn-ct-reconstruction-layers-torch-backprojection-2d-module"></span><h2>pyronn.ct_reconstruction.layers.torch.backprojection_2d module<a class="headerlink" href="#module-pyronn.ct_reconstruction.layers.torch.backprojection_2d" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="pyronn.ct_reconstruction.layers.torch.backprojection_2d.FanBackProjection2D">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyronn.ct_reconstruction.layers.torch.backprojection_2d.</span></span><span class="sig-name descname"><span class="pre">FanBackProjection2D</span></span><a class="reference internal" href="_modules/pyronn/ct_reconstruction/layers/torch/backprojection_2d.html#FanBackProjection2D"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyronn.ct_reconstruction.layers.torch.backprojection_2d.FanBackProjection2D" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pyronn.ct_reconstruction.layers.torch.backprojection_2d.FanBackProjection2D.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">geometry</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="reference internal" href="_modules/pyronn/ct_reconstruction/layers/torch/backprojection_2d.html#FanBackProjection2D.forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyronn.ct_reconstruction.layers.torch.backprojection_2d.FanBackProjection2D.forward" title="Link to this definition"></a></dt>
+<dd><p>Defines the computation performed at every call.</p>
+<p>Should be overridden by all subclasses.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Although the recipe for forward pass needs to be defined within
+this function, one should call the <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code> instance afterwards
+instead of this since the former takes care of running the
+registered hooks while the latter silently ignores them.</p>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pyronn.ct_reconstruction.layers.torch.backprojection_2d.FanBackProjection2DFunction">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyronn.ct_reconstruction.layers.torch.backprojection_2d.</span></span><span class="sig-name descname"><span class="pre">FanBackProjection2DFunction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyronn/ct_reconstruction/layers/torch/backprojection_2d.html#FanBackProjection2DFunction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyronn.ct_reconstruction.layers.torch.backprojection_2d.FanBackProjection2DFunction" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Function</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pyronn.ct_reconstruction.layers.torch.backprojection_2d.FanBackProjection2DFunction.backward">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">backward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ctx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">grad</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span></span></span><a class="reference internal" href="_modules/pyronn/ct_reconstruction/layers/torch/backprojection_2d.html#FanBackProjection2DFunction.backward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyronn.ct_reconstruction.layers.torch.backprojection_2d.FanBackProjection2DFunction.backward" title="Link to this definition"></a></dt>
+<dd><p>Defines a formula for differentiating the operation with backward mode
+automatic differentiation (alias to the vjp function).</p>
+<p>This function is to be overridden by all subclasses.</p>
+<p>It must accept a context <code class="xref py py-attr docutils literal notranslate"><span class="pre">ctx</span></code> as the first argument, followed by
+as many outputs as the <a class="reference internal" href="#pyronn.ct_reconstruction.layers.torch.backprojection_2d.FanBackProjection2DFunction.forward" title="pyronn.ct_reconstruction.layers.torch.backprojection_2d.FanBackProjection2DFunction.forward"><code class="xref py py-func docutils literal notranslate"><span class="pre">forward()</span></code></a> returned (None will be passed in
+for non tensor outputs of the forward function),
+and it should return as many tensors, as there were inputs to
+<a class="reference internal" href="#pyronn.ct_reconstruction.layers.torch.backprojection_2d.FanBackProjection2DFunction.forward" title="pyronn.ct_reconstruction.layers.torch.backprojection_2d.FanBackProjection2DFunction.forward"><code class="xref py py-func docutils literal notranslate"><span class="pre">forward()</span></code></a>. Each argument is the gradient w.r.t the given output,
+and each returned value should be the gradient w.r.t. the
+corresponding input. If an input is not a Tensor or is a Tensor not
+requiring grads, you can just pass None as a gradient for that input.</p>
+<p>The context can be used to retrieve tensors saved during the forward
+pass. It also has an attribute <code class="xref py py-attr docutils literal notranslate"><span class="pre">ctx.needs_input_grad</span></code> as a tuple
+of booleans representing whether each input needs gradient. E.g.,
+<a class="reference internal" href="#pyronn.ct_reconstruction.layers.torch.backprojection_2d.FanBackProjection2DFunction.backward" title="pyronn.ct_reconstruction.layers.torch.backprojection_2d.FanBackProjection2DFunction.backward"><code class="xref py py-func docutils literal notranslate"><span class="pre">backward()</span></code></a> will have <code class="docutils literal notranslate"><span class="pre">ctx.needs_input_grad[0]</span> <span class="pre">=</span> <span class="pre">True</span></code> if the
+first input to <a class="reference internal" href="#pyronn.ct_reconstruction.layers.torch.backprojection_2d.FanBackProjection2DFunction.forward" title="pyronn.ct_reconstruction.layers.torch.backprojection_2d.FanBackProjection2DFunction.forward"><code class="xref py py-func docutils literal notranslate"><span class="pre">forward()</span></code></a> needs gradient computated w.r.t. the
+output.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyronn.ct_reconstruction.layers.torch.backprojection_2d.FanBackProjection2DFunction.forward">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ctx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">volume_shape</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">volume_origin</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">detector_origin</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">volume_spacing</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">detector_spacing</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source_isocenter_distance</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source_detector_distance</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trajectory</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="reference internal" href="_modules/pyronn/ct_reconstruction/layers/torch/backprojection_2d.html#FanBackProjection2DFunction.forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyronn.ct_reconstruction.layers.torch.backprojection_2d.FanBackProjection2DFunction.forward" title="Link to this definition"></a></dt>
+<dd><p>Performs the operation.</p>
+<p>This function is to be overridden by all subclasses.</p>
+<p>It must accept a context ctx as the first argument, followed by any
+number of arguments (tensors or other types).</p>
+<p>The context can be used to store arbitrary data that can be then
+retrieved during the backward pass. Tensors should not be stored
+directly on <cite>ctx</cite> (though this is not currently enforced for
+backward compatibility). Instead, tensors should be saved either with
+<code class="xref py py-func docutils literal notranslate"><span class="pre">ctx.save_for_backward()</span></code> if they are intended to be used in
+<code class="docutils literal notranslate"><span class="pre">backward</span></code> (equivalently, <code class="docutils literal notranslate"><span class="pre">vjp</span></code>) or <code class="xref py py-func docutils literal notranslate"><span class="pre">ctx.save_for_forward()</span></code>
+if they are intended to be used for in <code class="docutils literal notranslate"><span class="pre">jvp</span></code>.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pyronn.ct_reconstruction.layers.torch.backprojection_2d.ParallelBackProjection2D">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyronn.ct_reconstruction.layers.torch.backprojection_2d.</span></span><span class="sig-name descname"><span class="pre">ParallelBackProjection2D</span></span><a class="reference internal" href="_modules/pyronn/ct_reconstruction/layers/torch/backprojection_2d.html#ParallelBackProjection2D"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyronn.ct_reconstruction.layers.torch.backprojection_2d.ParallelBackProjection2D" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pyronn.ct_reconstruction.layers.torch.backprojection_2d.ParallelBackProjection2D.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">geometry</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="reference internal" href="_modules/pyronn/ct_reconstruction/layers/torch/backprojection_2d.html#ParallelBackProjection2D.forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyronn.ct_reconstruction.layers.torch.backprojection_2d.ParallelBackProjection2D.forward" title="Link to this definition"></a></dt>
+<dd><p>Defines the computation performed at every call.</p>
+<p>Should be overridden by all subclasses.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Although the recipe for forward pass needs to be defined within
+this function, one should call the <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code> instance afterwards
+instead of this since the former takes care of running the
+registered hooks while the latter silently ignores them.</p>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pyronn.ct_reconstruction.layers.torch.backprojection_2d.ParallelBackProjection2DFunction">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyronn.ct_reconstruction.layers.torch.backprojection_2d.</span></span><span class="sig-name descname"><span class="pre">ParallelBackProjection2DFunction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyronn/ct_reconstruction/layers/torch/backprojection_2d.html#ParallelBackProjection2DFunction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyronn.ct_reconstruction.layers.torch.backprojection_2d.ParallelBackProjection2DFunction" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Function</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pyronn.ct_reconstruction.layers.torch.backprojection_2d.ParallelBackProjection2DFunction.backward">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">backward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ctx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">grad</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span></span></span><a class="reference internal" href="_modules/pyronn/ct_reconstruction/layers/torch/backprojection_2d.html#ParallelBackProjection2DFunction.backward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyronn.ct_reconstruction.layers.torch.backprojection_2d.ParallelBackProjection2DFunction.backward" title="Link to this definition"></a></dt>
+<dd><p>Defines a formula for differentiating the operation with backward mode
+automatic differentiation (alias to the vjp function).</p>
+<p>This function is to be overridden by all subclasses.</p>
+<p>It must accept a context <code class="xref py py-attr docutils literal notranslate"><span class="pre">ctx</span></code> as the first argument, followed by
+as many outputs as the <a class="reference internal" href="#pyronn.ct_reconstruction.layers.torch.backprojection_2d.ParallelBackProjection2DFunction.forward" title="pyronn.ct_reconstruction.layers.torch.backprojection_2d.ParallelBackProjection2DFunction.forward"><code class="xref py py-func docutils literal notranslate"><span class="pre">forward()</span></code></a> returned (None will be passed in
+for non tensor outputs of the forward function),
+and it should return as many tensors, as there were inputs to
+<a class="reference internal" href="#pyronn.ct_reconstruction.layers.torch.backprojection_2d.ParallelBackProjection2DFunction.forward" title="pyronn.ct_reconstruction.layers.torch.backprojection_2d.ParallelBackProjection2DFunction.forward"><code class="xref py py-func docutils literal notranslate"><span class="pre">forward()</span></code></a>. Each argument is the gradient w.r.t the given output,
+and each returned value should be the gradient w.r.t. the
+corresponding input. If an input is not a Tensor or is a Tensor not
+requiring grads, you can just pass None as a gradient for that input.</p>
+<p>The context can be used to retrieve tensors saved during the forward
+pass. It also has an attribute <code class="xref py py-attr docutils literal notranslate"><span class="pre">ctx.needs_input_grad</span></code> as a tuple
+of booleans representing whether each input needs gradient. E.g.,
+<a class="reference internal" href="#pyronn.ct_reconstruction.layers.torch.backprojection_2d.ParallelBackProjection2DFunction.backward" title="pyronn.ct_reconstruction.layers.torch.backprojection_2d.ParallelBackProjection2DFunction.backward"><code class="xref py py-func docutils literal notranslate"><span class="pre">backward()</span></code></a> will have <code class="docutils literal notranslate"><span class="pre">ctx.needs_input_grad[0]</span> <span class="pre">=</span> <span class="pre">True</span></code> if the
+first input to <a class="reference internal" href="#pyronn.ct_reconstruction.layers.torch.backprojection_2d.ParallelBackProjection2DFunction.forward" title="pyronn.ct_reconstruction.layers.torch.backprojection_2d.ParallelBackProjection2DFunction.forward"><code class="xref py py-func docutils literal notranslate"><span class="pre">forward()</span></code></a> needs gradient computated w.r.t. the
+output.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyronn.ct_reconstruction.layers.torch.backprojection_2d.ParallelBackProjection2DFunction.forward">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ctx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">volume_shape</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">volume_origin</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">detector_origin</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">volume_spacing</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">detector_spacing</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trajectory</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="reference internal" href="_modules/pyronn/ct_reconstruction/layers/torch/backprojection_2d.html#ParallelBackProjection2DFunction.forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyronn.ct_reconstruction.layers.torch.backprojection_2d.ParallelBackProjection2DFunction.forward" title="Link to this definition"></a></dt>
+<dd><p>Performs the operation.</p>
+<p>This function is to be overridden by all subclasses.</p>
+<p>It must accept a context ctx as the first argument, followed by any
+number of arguments (tensors or other types).</p>
+<p>The context can be used to store arbitrary data that can be then
+retrieved during the backward pass. Tensors should not be stored
+directly on <cite>ctx</cite> (though this is not currently enforced for
+backward compatibility). Instead, tensors should be saved either with
+<code class="xref py py-func docutils literal notranslate"><span class="pre">ctx.save_for_backward()</span></code> if they are intended to be used in
+<code class="docutils literal notranslate"><span class="pre">backward</span></code> (equivalently, <code class="docutils literal notranslate"><span class="pre">vjp</span></code>) or <code class="xref py py-func docutils literal notranslate"><span class="pre">ctx.save_for_forward()</span></code>
+if they are intended to be used for in <code class="docutils literal notranslate"><span class="pre">jvp</span></code>.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-pyronn.ct_reconstruction.layers.torch.backprojection_3d">
+<span id="pyronn-ct-reconstruction-layers-torch-backprojection-3d-module"></span><h2>pyronn.ct_reconstruction.layers.torch.backprojection_3d module<a class="headerlink" href="#module-pyronn.ct_reconstruction.layers.torch.backprojection_3d" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="pyronn.ct_reconstruction.layers.torch.backprojection_3d.ConeBackProjection3D">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyronn.ct_reconstruction.layers.torch.backprojection_3d.</span></span><span class="sig-name descname"><span class="pre">ConeBackProjection3D</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hardware_interp</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyronn/ct_reconstruction/layers/torch/backprojection_3d.html#ConeBackProjection3D"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyronn.ct_reconstruction.layers.torch.backprojection_3d.ConeBackProjection3D" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pyronn.ct_reconstruction.layers.torch.backprojection_3d.ConeBackProjection3D.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">geometry</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="reference internal" href="_modules/pyronn/ct_reconstruction/layers/torch/backprojection_3d.html#ConeBackProjection3D.forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyronn.ct_reconstruction.layers.torch.backprojection_3d.ConeBackProjection3D.forward" title="Link to this definition"></a></dt>
+<dd><p>Defines the computation performed at every call.</p>
+<p>Should be overridden by all subclasses.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Although the recipe for forward pass needs to be defined within
+this function, one should call the <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code> instance afterwards
+instead of this since the former takes care of running the
+registered hooks while the latter silently ignores them.</p>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pyronn.ct_reconstruction.layers.torch.backprojection_3d.ConeBackProjection3DFunction">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyronn.ct_reconstruction.layers.torch.backprojection_3d.</span></span><span class="sig-name descname"><span class="pre">ConeBackProjection3DFunction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyronn/ct_reconstruction/layers/torch/backprojection_3d.html#ConeBackProjection3DFunction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyronn.ct_reconstruction.layers.torch.backprojection_3d.ConeBackProjection3DFunction" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Function</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pyronn.ct_reconstruction.layers.torch.backprojection_3d.ConeBackProjection3DFunction.backward">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">backward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ctx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">grad</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span></span></span><a class="reference internal" href="_modules/pyronn/ct_reconstruction/layers/torch/backprojection_3d.html#ConeBackProjection3DFunction.backward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyronn.ct_reconstruction.layers.torch.backprojection_3d.ConeBackProjection3DFunction.backward" title="Link to this definition"></a></dt>
+<dd><p>Defines a formula for differentiating the operation with backward mode
+automatic differentiation (alias to the vjp function).</p>
+<p>This function is to be overridden by all subclasses.</p>
+<p>It must accept a context <code class="xref py py-attr docutils literal notranslate"><span class="pre">ctx</span></code> as the first argument, followed by
+as many outputs as the <a class="reference internal" href="#pyronn.ct_reconstruction.layers.torch.backprojection_3d.ConeBackProjection3DFunction.forward" title="pyronn.ct_reconstruction.layers.torch.backprojection_3d.ConeBackProjection3DFunction.forward"><code class="xref py py-func docutils literal notranslate"><span class="pre">forward()</span></code></a> returned (None will be passed in
+for non tensor outputs of the forward function),
+and it should return as many tensors, as there were inputs to
+<a class="reference internal" href="#pyronn.ct_reconstruction.layers.torch.backprojection_3d.ConeBackProjection3DFunction.forward" title="pyronn.ct_reconstruction.layers.torch.backprojection_3d.ConeBackProjection3DFunction.forward"><code class="xref py py-func docutils literal notranslate"><span class="pre">forward()</span></code></a>. Each argument is the gradient w.r.t the given output,
+and each returned value should be the gradient w.r.t. the
+corresponding input. If an input is not a Tensor or is a Tensor not
+requiring grads, you can just pass None as a gradient for that input.</p>
+<p>The context can be used to retrieve tensors saved during the forward
+pass. It also has an attribute <code class="xref py py-attr docutils literal notranslate"><span class="pre">ctx.needs_input_grad</span></code> as a tuple
+of booleans representing whether each input needs gradient. E.g.,
+<a class="reference internal" href="#pyronn.ct_reconstruction.layers.torch.backprojection_3d.ConeBackProjection3DFunction.backward" title="pyronn.ct_reconstruction.layers.torch.backprojection_3d.ConeBackProjection3DFunction.backward"><code class="xref py py-func docutils literal notranslate"><span class="pre">backward()</span></code></a> will have <code class="docutils literal notranslate"><span class="pre">ctx.needs_input_grad[0]</span> <span class="pre">=</span> <span class="pre">True</span></code> if the
+first input to <a class="reference internal" href="#pyronn.ct_reconstruction.layers.torch.backprojection_3d.ConeBackProjection3DFunction.forward" title="pyronn.ct_reconstruction.layers.torch.backprojection_3d.ConeBackProjection3DFunction.forward"><code class="xref py py-func docutils literal notranslate"><span class="pre">forward()</span></code></a> needs gradient computated w.r.t. the
+output.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyronn.ct_reconstruction.layers.torch.backprojection_3d.ConeBackProjection3DFunction.forward">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ctx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">volume_shape</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">volume_origin</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">volume_spacing</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trajectory</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">projection_multiplier</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hardware_interp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="reference internal" href="_modules/pyronn/ct_reconstruction/layers/torch/backprojection_3d.html#ConeBackProjection3DFunction.forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyronn.ct_reconstruction.layers.torch.backprojection_3d.ConeBackProjection3DFunction.forward" title="Link to this definition"></a></dt>
+<dd><p>Performs the operation.</p>
+<p>This function is to be overridden by all subclasses.</p>
+<p>It must accept a context ctx as the first argument, followed by any
+number of arguments (tensors or other types).</p>
+<p>The context can be used to store arbitrary data that can be then
+retrieved during the backward pass. Tensors should not be stored
+directly on <cite>ctx</cite> (though this is not currently enforced for
+backward compatibility). Instead, tensors should be saved either with
+<code class="xref py py-func docutils literal notranslate"><span class="pre">ctx.save_for_backward()</span></code> if they are intended to be used in
+<code class="docutils literal notranslate"><span class="pre">backward</span></code> (equivalently, <code class="docutils literal notranslate"><span class="pre">vjp</span></code>) or <code class="xref py py-func docutils literal notranslate"><span class="pre">ctx.save_for_forward()</span></code>
+if they are intended to be used for in <code class="docutils literal notranslate"><span class="pre">jvp</span></code>.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-pyronn.ct_reconstruction.layers.torch.projection_2d">
+<span id="pyronn-ct-reconstruction-layers-torch-projection-2d-module"></span><h2>pyronn.ct_reconstruction.layers.torch.projection_2d module<a class="headerlink" href="#module-pyronn.ct_reconstruction.layers.torch.projection_2d" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="pyronn.ct_reconstruction.layers.torch.projection_2d.FanProjection2D">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyronn.ct_reconstruction.layers.torch.projection_2d.</span></span><span class="sig-name descname"><span class="pre">FanProjection2D</span></span><a class="reference internal" href="_modules/pyronn/ct_reconstruction/layers/torch/projection_2d.html#FanProjection2D"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyronn.ct_reconstruction.layers.torch.projection_2d.FanProjection2D" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pyronn.ct_reconstruction.layers.torch.projection_2d.FanProjection2D.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">geometry</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="reference internal" href="_modules/pyronn/ct_reconstruction/layers/torch/projection_2d.html#FanProjection2D.forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyronn.ct_reconstruction.layers.torch.projection_2d.FanProjection2D.forward" title="Link to this definition"></a></dt>
+<dd><p>Defines the computation performed at every call.</p>
+<p>Should be overridden by all subclasses.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Although the recipe for forward pass needs to be defined within
+this function, one should call the <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code> instance afterwards
+instead of this since the former takes care of running the
+registered hooks while the latter silently ignores them.</p>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pyronn.ct_reconstruction.layers.torch.projection_2d.FanProjection2DFunction">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyronn.ct_reconstruction.layers.torch.projection_2d.</span></span><span class="sig-name descname"><span class="pre">FanProjection2DFunction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyronn/ct_reconstruction/layers/torch/projection_2d.html#FanProjection2DFunction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyronn.ct_reconstruction.layers.torch.projection_2d.FanProjection2DFunction" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Function</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pyronn.ct_reconstruction.layers.torch.projection_2d.FanProjection2DFunction.backward">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">backward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ctx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">grad</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span></span></span><a class="reference internal" href="_modules/pyronn/ct_reconstruction/layers/torch/projection_2d.html#FanProjection2DFunction.backward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyronn.ct_reconstruction.layers.torch.projection_2d.FanProjection2DFunction.backward" title="Link to this definition"></a></dt>
+<dd><p>Defines a formula for differentiating the operation with backward mode
+automatic differentiation (alias to the vjp function).</p>
+<p>This function is to be overridden by all subclasses.</p>
+<p>It must accept a context <code class="xref py py-attr docutils literal notranslate"><span class="pre">ctx</span></code> as the first argument, followed by
+as many outputs as the <a class="reference internal" href="#pyronn.ct_reconstruction.layers.torch.projection_2d.FanProjection2DFunction.forward" title="pyronn.ct_reconstruction.layers.torch.projection_2d.FanProjection2DFunction.forward"><code class="xref py py-func docutils literal notranslate"><span class="pre">forward()</span></code></a> returned (None will be passed in
+for non tensor outputs of the forward function),
+and it should return as many tensors, as there were inputs to
+<a class="reference internal" href="#pyronn.ct_reconstruction.layers.torch.projection_2d.FanProjection2DFunction.forward" title="pyronn.ct_reconstruction.layers.torch.projection_2d.FanProjection2DFunction.forward"><code class="xref py py-func docutils literal notranslate"><span class="pre">forward()</span></code></a>. Each argument is the gradient w.r.t the given output,
+and each returned value should be the gradient w.r.t. the
+corresponding input. If an input is not a Tensor or is a Tensor not
+requiring grads, you can just pass None as a gradient for that input.</p>
+<p>The context can be used to retrieve tensors saved during the forward
+pass. It also has an attribute <code class="xref py py-attr docutils literal notranslate"><span class="pre">ctx.needs_input_grad</span></code> as a tuple
+of booleans representing whether each input needs gradient. E.g.,
+<a class="reference internal" href="#pyronn.ct_reconstruction.layers.torch.projection_2d.FanProjection2DFunction.backward" title="pyronn.ct_reconstruction.layers.torch.projection_2d.FanProjection2DFunction.backward"><code class="xref py py-func docutils literal notranslate"><span class="pre">backward()</span></code></a> will have <code class="docutils literal notranslate"><span class="pre">ctx.needs_input_grad[0]</span> <span class="pre">=</span> <span class="pre">True</span></code> if the
+first input to <a class="reference internal" href="#pyronn.ct_reconstruction.layers.torch.projection_2d.FanProjection2DFunction.forward" title="pyronn.ct_reconstruction.layers.torch.projection_2d.FanProjection2DFunction.forward"><code class="xref py py-func docutils literal notranslate"><span class="pre">forward()</span></code></a> needs gradient computated w.r.t. the
+output.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyronn.ct_reconstruction.layers.torch.projection_2d.FanProjection2DFunction.forward">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ctx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sinogram_shape</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">volume_origin</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">detector_origin</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">volume_spacing</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">detector_spacing</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source_isocenter_distance</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source_detector_distance</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trajectory</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="reference internal" href="_modules/pyronn/ct_reconstruction/layers/torch/projection_2d.html#FanProjection2DFunction.forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyronn.ct_reconstruction.layers.torch.projection_2d.FanProjection2DFunction.forward" title="Link to this definition"></a></dt>
+<dd><p>Forward operator of 2D fan projection
+:param input: volume to be projected
+:param sinogram_shape: number_of_projections x detector_width
+:param volume_origin: origin of the world coordinate system w.r.t. the volume array (tensor)
+:param …:</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pyronn.ct_reconstruction.layers.torch.projection_2d.ParallelProjection2D">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyronn.ct_reconstruction.layers.torch.projection_2d.</span></span><span class="sig-name descname"><span class="pre">ParallelProjection2D</span></span><a class="reference internal" href="_modules/pyronn/ct_reconstruction/layers/torch/projection_2d.html#ParallelProjection2D"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyronn.ct_reconstruction.layers.torch.projection_2d.ParallelProjection2D" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pyronn.ct_reconstruction.layers.torch.projection_2d.ParallelProjection2D.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">geometry</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="reference internal" href="_modules/pyronn/ct_reconstruction/layers/torch/projection_2d.html#ParallelProjection2D.forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyronn.ct_reconstruction.layers.torch.projection_2d.ParallelProjection2D.forward" title="Link to this definition"></a></dt>
+<dd><p>Defines the computation performed at every call.</p>
+<p>Should be overridden by all subclasses.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Although the recipe for forward pass needs to be defined within
+this function, one should call the <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code> instance afterwards
+instead of this since the former takes care of running the
+registered hooks while the latter silently ignores them.</p>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pyronn.ct_reconstruction.layers.torch.projection_2d.ParallelProjection2DFunction">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyronn.ct_reconstruction.layers.torch.projection_2d.</span></span><span class="sig-name descname"><span class="pre">ParallelProjection2DFunction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyronn/ct_reconstruction/layers/torch/projection_2d.html#ParallelProjection2DFunction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyronn.ct_reconstruction.layers.torch.projection_2d.ParallelProjection2DFunction" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Function</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pyronn.ct_reconstruction.layers.torch.projection_2d.ParallelProjection2DFunction.backward">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">backward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ctx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">grad</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span></span></span><a class="reference internal" href="_modules/pyronn/ct_reconstruction/layers/torch/projection_2d.html#ParallelProjection2DFunction.backward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyronn.ct_reconstruction.layers.torch.projection_2d.ParallelProjection2DFunction.backward" title="Link to this definition"></a></dt>
+<dd><p>Defines a formula for differentiating the operation with backward mode
+automatic differentiation (alias to the vjp function).</p>
+<p>This function is to be overridden by all subclasses.</p>
+<p>It must accept a context <code class="xref py py-attr docutils literal notranslate"><span class="pre">ctx</span></code> as the first argument, followed by
+as many outputs as the <a class="reference internal" href="#pyronn.ct_reconstruction.layers.torch.projection_2d.ParallelProjection2DFunction.forward" title="pyronn.ct_reconstruction.layers.torch.projection_2d.ParallelProjection2DFunction.forward"><code class="xref py py-func docutils literal notranslate"><span class="pre">forward()</span></code></a> returned (None will be passed in
+for non tensor outputs of the forward function),
+and it should return as many tensors, as there were inputs to
+<a class="reference internal" href="#pyronn.ct_reconstruction.layers.torch.projection_2d.ParallelProjection2DFunction.forward" title="pyronn.ct_reconstruction.layers.torch.projection_2d.ParallelProjection2DFunction.forward"><code class="xref py py-func docutils literal notranslate"><span class="pre">forward()</span></code></a>. Each argument is the gradient w.r.t the given output,
+and each returned value should be the gradient w.r.t. the
+corresponding input. If an input is not a Tensor or is a Tensor not
+requiring grads, you can just pass None as a gradient for that input.</p>
+<p>The context can be used to retrieve tensors saved during the forward
+pass. It also has an attribute <code class="xref py py-attr docutils literal notranslate"><span class="pre">ctx.needs_input_grad</span></code> as a tuple
+of booleans representing whether each input needs gradient. E.g.,
+<a class="reference internal" href="#pyronn.ct_reconstruction.layers.torch.projection_2d.ParallelProjection2DFunction.backward" title="pyronn.ct_reconstruction.layers.torch.projection_2d.ParallelProjection2DFunction.backward"><code class="xref py py-func docutils literal notranslate"><span class="pre">backward()</span></code></a> will have <code class="docutils literal notranslate"><span class="pre">ctx.needs_input_grad[0]</span> <span class="pre">=</span> <span class="pre">True</span></code> if the
+first input to <a class="reference internal" href="#pyronn.ct_reconstruction.layers.torch.projection_2d.ParallelProjection2DFunction.forward" title="pyronn.ct_reconstruction.layers.torch.projection_2d.ParallelProjection2DFunction.forward"><code class="xref py py-func docutils literal notranslate"><span class="pre">forward()</span></code></a> needs gradient computated w.r.t. the
+output.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyronn.ct_reconstruction.layers.torch.projection_2d.ParallelProjection2DFunction.forward">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ctx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sinogram_shape</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">volume_origin</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">detector_origin</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">volume_spacing</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">detector_spacing</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trajectory</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="reference internal" href="_modules/pyronn/ct_reconstruction/layers/torch/projection_2d.html#ParallelProjection2DFunction.forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyronn.ct_reconstruction.layers.torch.projection_2d.ParallelProjection2DFunction.forward" title="Link to this definition"></a></dt>
+<dd><p>Forward operator of 2D parallel projection
+:param input: volume to be projected
+:param sinogram_shape: number_of_projections x detector_width
+:param volume_origin: origin of the world coordinate system w.r.t. the volume array (tensor)
+:param …:</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-pyronn.ct_reconstruction.layers.torch.projection_3d">
+<span id="pyronn-ct-reconstruction-layers-torch-projection-3d-module"></span><h2>pyronn.ct_reconstruction.layers.torch.projection_3d module<a class="headerlink" href="#module-pyronn.ct_reconstruction.layers.torch.projection_3d" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="pyronn.ct_reconstruction.layers.torch.projection_3d.ConeProjection3D">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyronn.ct_reconstruction.layers.torch.projection_3d.</span></span><span class="sig-name descname"><span class="pre">ConeProjection3D</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hardware_interp</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyronn/ct_reconstruction/layers/torch/projection_3d.html#ConeProjection3D"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyronn.ct_reconstruction.layers.torch.projection_3d.ConeProjection3D" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pyronn.ct_reconstruction.layers.torch.projection_3d.ConeProjection3D.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">geometry</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="reference internal" href="_modules/pyronn/ct_reconstruction/layers/torch/projection_3d.html#ConeProjection3D.forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyronn.ct_reconstruction.layers.torch.projection_3d.ConeProjection3D.forward" title="Link to this definition"></a></dt>
+<dd><p>Defines the computation performed at every call.</p>
+<p>Should be overridden by all subclasses.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Although the recipe for forward pass needs to be defined within
+this function, one should call the <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code> instance afterwards
+instead of this since the former takes care of running the
+registered hooks while the latter silently ignores them.</p>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pyronn.ct_reconstruction.layers.torch.projection_3d.ConeProjection3DFunction">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyronn.ct_reconstruction.layers.torch.projection_3d.</span></span><span class="sig-name descname"><span class="pre">ConeProjection3DFunction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyronn/ct_reconstruction/layers/torch/projection_3d.html#ConeProjection3DFunction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyronn.ct_reconstruction.layers.torch.projection_3d.ConeProjection3DFunction" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Function</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pyronn.ct_reconstruction.layers.torch.projection_3d.ConeProjection3DFunction.backward">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">backward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ctx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">grad</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span></span></span><a class="reference internal" href="_modules/pyronn/ct_reconstruction/layers/torch/projection_3d.html#ConeProjection3DFunction.backward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyronn.ct_reconstruction.layers.torch.projection_3d.ConeProjection3DFunction.backward" title="Link to this definition"></a></dt>
+<dd><p>Defines a formula for differentiating the operation with backward mode
+automatic differentiation (alias to the vjp function).</p>
+<p>This function is to be overridden by all subclasses.</p>
+<p>It must accept a context <code class="xref py py-attr docutils literal notranslate"><span class="pre">ctx</span></code> as the first argument, followed by
+as many outputs as the <a class="reference internal" href="#pyronn.ct_reconstruction.layers.torch.projection_3d.ConeProjection3DFunction.forward" title="pyronn.ct_reconstruction.layers.torch.projection_3d.ConeProjection3DFunction.forward"><code class="xref py py-func docutils literal notranslate"><span class="pre">forward()</span></code></a> returned (None will be passed in
+for non tensor outputs of the forward function),
+and it should return as many tensors, as there were inputs to
+<a class="reference internal" href="#pyronn.ct_reconstruction.layers.torch.projection_3d.ConeProjection3DFunction.forward" title="pyronn.ct_reconstruction.layers.torch.projection_3d.ConeProjection3DFunction.forward"><code class="xref py py-func docutils literal notranslate"><span class="pre">forward()</span></code></a>. Each argument is the gradient w.r.t the given output,
+and each returned value should be the gradient w.r.t. the
+corresponding input. If an input is not a Tensor or is a Tensor not
+requiring grads, you can just pass None as a gradient for that input.</p>
+<p>The context can be used to retrieve tensors saved during the forward
+pass. It also has an attribute <code class="xref py py-attr docutils literal notranslate"><span class="pre">ctx.needs_input_grad</span></code> as a tuple
+of booleans representing whether each input needs gradient. E.g.,
+<a class="reference internal" href="#pyronn.ct_reconstruction.layers.torch.projection_3d.ConeProjection3DFunction.backward" title="pyronn.ct_reconstruction.layers.torch.projection_3d.ConeProjection3DFunction.backward"><code class="xref py py-func docutils literal notranslate"><span class="pre">backward()</span></code></a> will have <code class="docutils literal notranslate"><span class="pre">ctx.needs_input_grad[0]</span> <span class="pre">=</span> <span class="pre">True</span></code> if the
+first input to <a class="reference internal" href="#pyronn.ct_reconstruction.layers.torch.projection_3d.ConeProjection3DFunction.forward" title="pyronn.ct_reconstruction.layers.torch.projection_3d.ConeProjection3DFunction.forward"><code class="xref py py-func docutils literal notranslate"><span class="pre">forward()</span></code></a> needs gradient computated w.r.t. the
+output.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyronn.ct_reconstruction.layers.torch.projection_3d.ConeProjection3DFunction.forward">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ctx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sinogram_shape</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">volume_origin</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">volume_spacing</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trajectory</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">projection_multiplier</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hardware_interp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="reference internal" href="_modules/pyronn/ct_reconstruction/layers/torch/projection_3d.html#ConeProjection3DFunction.forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyronn.ct_reconstruction.layers.torch.projection_3d.ConeProjection3DFunction.forward" title="Link to this definition"></a></dt>
+<dd><p>Forward operator of 2D fan projection
+:param input: volume to be projected
+:param sinogram_shape: number_of_projections x detector_width
+:param volume_origin: origin of the world coordinate system w.r.t. the volume array (tensor)
+:param …:</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="pyronn-ct-reconstruction-layers-torch-reconstruction-module">
+<h2>pyronn.ct_reconstruction.layers.torch.reconstruction module<a class="headerlink" href="#pyronn-ct-reconstruction-layers-torch-reconstruction-module" title="Link to this heading"></a></h2>
+</section>
+<section id="module-pyronn.ct_reconstruction.layers.torch">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-pyronn.ct_reconstruction.layers.torch" title="Link to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Anshul Dhingra.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
